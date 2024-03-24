@@ -1,0 +1,18 @@
+.wrapper {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.container {
+    width: 100%;
+    min-height: 1000px;
+    max-width: var(--default-layout-width, 1150px);
+    align-self: center;
+    display: flex;
+}
+
+.content {
+    width: 100%;
+    min-height: 1000px;
+}
