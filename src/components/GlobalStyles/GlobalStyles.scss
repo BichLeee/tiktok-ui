@@ -3,10 +3,19 @@
 
 :root {
     --primary: #fe2c55;
+    --white: #fff;
 
     //Default layout
     --default-layout-header-height: 60px;
     --default-layout-width: 1150px;
+
+    //color
+    --color-grey100: rgba(22, 24, 35, 1);
+    --color-grey50: rgba(22, 24, 35, 0.5);
+    --color-grey20: rgba(22, 24, 35, 0.2);
+    --color-grey12: rgba(22, 24, 35, 0.12);
+    --color-grey6: rgba(22, 24, 35, 0.06);
+    --color-grey3: rgba(22, 24, 35, 0.03);
 }
 
 * {
@@ -25,4 +34,15 @@ body {
     font-size: 1.6rem; //--> 1rem = 10px; 1.6rem = 16px
     line-height: 1.5;
     text-rendering: optimizeSpeed;
+}
+
+button,
+input,
+[tabindex] {
+    outline: none;
+    border: none !important;
+}
+
+a[href] {
+    color: var(--color-grey100);
 }
