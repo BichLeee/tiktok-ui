@@ -13,6 +13,8 @@ function Button({
     secondary = false,
     rounded = false,
     size = 'medium',
+    leftIcon,
+    rightIcon,
     className,
     children,
     onClick,
@@ -32,11 +34,17 @@ function Button({
         Component = 'a';
     }
 
-    const classes = cx('wrapper', { primary, outline, secondary, rounded, [className]: className }, size);
+    const classes = cx(
+        'wrapper',
+        { primary, outline, secondary, rounded, [className]: className },
+        size,
+    );
 
     return (
         <Component className={classes} {...props} role="button">
-            {children}
+            {leftIcon && <span className={cx('icon')}>{leftIcon}</span>}
+            <span className={cx('title')}>{children}</span>
+            {rightIcon && <span className={cx('icon')}>{rightIcon}</span>}
         </Component>
     );
 }

@@ -19,7 +19,8 @@
     color: var(--white) !important;
 
     &:hover {
-        background: linear-gradient(0deg, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.06)), rgb(254, 44, 85);
+        background: linear-gradient(0deg, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.06)),
+            rgb(254, 44, 85);
     }
 }
 
@@ -34,7 +35,7 @@
 }
 
 .secondary {
-    border: 1px solid rgba(22, 24, 35, 0.12) !important;
+    border: 1px solid rgba(22, 24, 35, 0.12) !important ;
     color: rgba(22, 24, 35, 0.75);
     box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 8px;
 
@@ -74,4 +75,9 @@
     min-height: 48px;
     min-width: auto;
     width: 100%;
+}
+
+.icon + .title,
+.title + .icon {
+    margin-left: 8px;
 }
