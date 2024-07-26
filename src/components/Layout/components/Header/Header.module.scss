@@ -120,6 +120,11 @@
     align-items: center;
 }
 
+.custom-icon-btn {
+    border: 0px !important;
+    box-shadow: none !important;
+}
+
 .custom-upload {
     font-size: 1.6rem !important;
     font-weight: 600 !important;
@@ -150,4 +155,12 @@
     object-fit: cover;
     margin-right: 12px;
     margin-left: 15px;
+    cursor: pointer;
+}
+
+.custom-tooltip {
+    font-size: 1.6rem !important;
+    font-weight: 600;
+    padding: 0px;
+    background-color: transparent;
 }

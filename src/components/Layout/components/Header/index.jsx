@@ -16,7 +16,8 @@ import {
     faGear,
     faArrowRightFromBracket,
 } from '@fortawesome/free-solid-svg-icons';
-import Tippy from '@tippyjs/react/headless';
+import HeadlessTippy from '@tippyjs/react/headless';
+import Tippy from '@tippyjs/react';
 
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import styles from './Header.module.scss';
@@ -24,6 +25,11 @@ import images from '~/assets/images';
 import AccountItem from '~/components/AccountItem';
 import Button from '~/components/Button';
 import Menu from '~/components/Popper/Menu';
+import { faBell, faMessage } from '@fortawesome/free-regular-svg-icons';
+import IconButton from '~/components/IconButton';
+
+import 'tippy.js/dist/tippy.css'; // optional
+import Image from '~/components/Image';
 
 const cx = classNames.bind(styles);
 
@@ -92,7 +98,7 @@ function Header() {
                 </div>
 
                 <div className={cx('search')}>
-                    <Tippy
+                    <HeadlessTippy
                         visible={accounts.length > 0}
                         interactive
                         render={(attrs) => (
@@ -117,7 +123,7 @@ function Header() {
                                 <FontAwesomeIcon icon={faMagnifyingGlass} />
                             </button>
                         </InputGroup>
-                    </Tippy>
+                    </HeadlessTippy>
                 </div>
                 <div className={cx('actions')}>
                     {currentUser ? (
@@ -130,11 +136,33 @@ function Header() {
                             >
                                 Tải lên
                             </Button>
+                            <div style={{ width: '20px' }} />
+                            <Tippy
+                                interactive
+                                placement="bottom"
+                                content="Tin nhắn"
+                                className={cx('custom-tooltip')}
+                            >
+                                <div>
+                                    <IconButton light icon={<FontAwesomeIcon icon={faMessage} />} />
+                                </div>
+                            </Tippy>
+                            <Tippy
+                                interactive
+                                placement="bottom"
+                                content="Hộp thư"
+                                className={cx('custom-tooltip')}
+                            >
+                                <div>
+                                    <IconButton light icon={<FontAwesomeIcon icon={faBell} />} />
+                                </div>
+                            </Tippy>
                             <Menu items={ACCOUNT_MENU_ITEMS}>
-                                <img
+                                <Image
                                     className={cx('account')}
-                                    src="https://p16-sign-sg.tiktokcdn.com/tos-alisg-avt-0068/4cfaa5c14950b5d6fea7def263c50c7e~c5_300x300.webp?lk3s=a5d48078&nonce=5047&refresh_token=86a7278b155d0510262fe698c9800543&x-expires=1721826000&x-signature=BFcJXzhYZ7ZB%2F9RJlyraGtnYky4%3D&shp=a5d48078&shcp=c1333099"
+                                    src="./avatar.webp"
                                     alt=""
+                                    fallback={images.default_avatar}
                                 />
                             </Menu>
                         </>

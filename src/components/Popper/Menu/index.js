@@ -15,7 +15,7 @@ function Menu({ children, items = [] }) {
     const current = history[history.length - 1];
 
     const renderItems = () => {
-        return current.data.map((item) => {
+        return current.data.map((item, index) => {
             if (item === 'hr') {
                 return <hr className={cx('hr')} />;
             }
@@ -24,13 +24,13 @@ function Menu({ children, items = [] }) {
             if (isParent) {
                 return (
                     <MenuItem
-                        key={item}
+                        key={`${item.title}-${index}`}
                         data={item}
                         onClick={() => setHistory((prev) => [...prev, { data: item.children }])}
                     />
                 );
             }
-            return <MenuItem key={item} data={item} />;
+            return <MenuItem key={`${item.title}-${index}`} data={item} />;
         });
     };
 

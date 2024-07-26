@@ -12,7 +12,7 @@ function Button({
     outline = false,
     secondary = false,
     rounded = false,
-    size = 'medium',
+    size = 'medium', // small, medium, large, auto
     leftIcon,
     rightIcon,
     className,
