@@ -3,19 +3,22 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle, faEllipsis } from '@fortawesome/free-solid-svg-icons';
 
 import styles from './AccountItem.module.scss';
+import Image from '../Image';
 
 const cx = classNames.bind(styles);
 
-function AccountItem() {
+function AccountItem({ info }) {
     return (
         <div className={cx('wrapper')}>
-            <img className={cx('avatar')} src="./avatar.webp" alt="" />
+            <Image className={cx('avatar')} src={info.avatar} alt="" />
             <div className={cx('info')}>
                 <div className={cx('name')}>
-                    <span>halinhoffical</span>
-                    <FontAwesomeIcon className={cx('check-icon')} icon={faCheckCircle} />
+                    <span>{info.nickname}</span>
+                    {info.tick && (
+                        <FontAwesomeIcon className={cx('check-icon')} icon={faCheckCircle} />
+                    )}
                 </div>
-                <span className={cx('username')}>Ha Linh Offical</span>
+                <span className={cx('username')}>{info.full_name}</span>
             </div>
         </div>
     );
