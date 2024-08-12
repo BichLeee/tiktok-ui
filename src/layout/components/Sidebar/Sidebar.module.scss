@@ -1,0 +1,40 @@
+.wrapper {
+    width: 100%;
+    max-width: 240px;
+}
+
+.inner {
+    width: 100%;
+    max-width: 240px;
+    padding: 20px 0px 26px 8px;
+    position: fixed;
+    overflow-y: scroll;
+    overscroll-behavior-y: contain;
+    perspective: 1px;
+    transform-style: preserve-3d;
+    perspective-origin: right top;
+    height: -webkit-fill-available;
+}
+
+.menu-container {
+    margin-bottom: 8px;
+}
+
+.following-container {
+    padding: 16px 0px;
+}
+
+.hr {
+    background: rgba(22, 24, 35, 0.12);
+    height: 1px;
+    transform: scaleY(50%);
+    padding-inline: 8px;
+}
+
+.following-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: rgba(22, 24, 35, 0.75);
+    padding: 0px 8px;
+    margin-bottom: 8px;
+}

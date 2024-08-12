@@ -5,6 +5,9 @@
     box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 1px;
     display: flex;
     justify-content: center;
+    position: sticky;
+    top: 0;
+    background-color: white;
 }
 
 .inner {
@@ -19,7 +22,12 @@
 }
 
 .logo {
-    width: 118px;
+    min-width: 300px;
+}
+
+.search {
+    max-width: 516px;
+    width: 100%;
 }
 
 .actions {
@@ -39,7 +47,7 @@
     border-radius: 0px !important;
     color: var(--color-grey100) !important;
     height: 36px;
-    padding: 0 16px !important;
+    //padding: 0 16px !important;
 
     &:hover {
         background-color: rgba(22, 24, 35, 0.03) !important;
@@ -70,4 +78,16 @@
     font-weight: 600;
     padding: 0px;
     background-color: transparent;
+}
+
+@media screen and (max-width: 768px) {
+    .search {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 479px) {
+    .custom-upload {
+        display: none;
+    }
 }

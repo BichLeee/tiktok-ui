@@ -13,6 +13,7 @@ import {
     faArrowRightFromBracket,
 } from '@fortawesome/free-solid-svg-icons';
 import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css';
 
 import styles from './Header.module.scss';
 import images from '~/assets/images';
@@ -20,9 +21,9 @@ import Button from '~/components/Button';
 import Menu from '~/components/Popper/Menu';
 import { faBell, faMessage } from '@fortawesome/free-regular-svg-icons';
 import IconButton from '~/components/IconButton';
-
 import Image from '~/components/Image';
 import Search from '../Search';
+import config from '~/config';
 
 const cx = classNames.bind(styles);
 
@@ -66,6 +67,22 @@ const ACCOUNT_MENU_ITEMS = [
         children: [
             { code: 'en', title: 'English' },
             { code: 'vi', title: 'Tiếng Việt' },
+            { code: 'en', title: 'English' },
+            { code: 'vi', title: 'Tiếng Việt' },
+            { code: 'en', title: 'English' },
+            { code: 'vi', title: 'Tiếng Việt' },
+            { code: 'en', title: 'English' },
+            { code: 'vi', title: 'Tiếng Việt' },
+            { code: 'en', title: 'English' },
+            { code: 'vi', title: 'Tiếng Việt' },
+            { code: 'en', title: 'English' },
+            { code: 'vi', title: 'Tiếng Việt' },
+            { code: 'en', title: 'English' },
+            { code: 'vi', title: 'Tiếng Việt' },
+            { code: 'en', title: 'English' },
+            { code: 'vi', title: 'Tiếng Việt' },
+            { code: 'en', title: 'English' },
+            { code: 'vi', title: 'Tiếng Việt' },
         ],
     },
     {
@@ -85,11 +102,14 @@ function Header() {
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
                 <div className={cx('logo')}>
-                    <Link to="/">
+                    <Link to={config.routes.home}>
                         <img src={images.logo} alt="Tiktok-logo" />
                     </Link>
                 </div>
-                <Search />
+
+                <div className={cx('search')}>
+                    <Search />
+                </div>
                 <div className={cx('actions')}>
                     {currentUser ? (
                         <>
@@ -104,6 +124,7 @@ function Header() {
                             <div style={{ width: '20px' }} />
                             <Tippy
                                 interactive
+                                arrow
                                 placement="bottom"
                                 content="Tin nhắn"
                                 className={cx('custom-tooltip')}
@@ -114,6 +135,7 @@ function Header() {
                             </Tippy>
                             <Tippy
                                 interactive
+                                arrow
                                 placement="bottom"
                                 content="Hộp thư"
                                 className={cx('custom-tooltip')}

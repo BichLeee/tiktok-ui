@@ -33,6 +33,39 @@ html {
 @font-face {
     font-family: TikTokFont;
     src: url('../../assets/fonts/TikTokFont_Regular.woff2');
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: TikTokFont;
+    src: url('../../assets/fonts/TikTokFont-Semibold.woff2');
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: TikTokFont;
+    src: url('../../assets/fonts/TikTokFont-Bold.woff2');
+    font-weight: 700;
+}
+
+// Scrollbar CSS
+
+/* width */
+*::-webkit-scrollbar {
+    width: 8px;
+}
+
+/* Track */
+*::-webkit-scrollbar-track {
+    border-radius: 4px;
+}
+
+/* Handle */
+*::-webkit-scrollbar-thumb {
+    background: rgba(22, 24, 35, 0.06);
+    border-radius: 3px;
+    width: 4px;
+    padding: 0px 4px;
 }
 
 body {
