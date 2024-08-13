@@ -1,6 +1,7 @@
 .wrapper {
     width: 100%;
     max-width: 240px;
+    position: relative;
 }
 
 .inner {
@@ -8,12 +9,24 @@
     max-width: 240px;
     padding: 20px 0px 26px 8px;
     position: fixed;
-    overflow-y: scroll;
-    overscroll-behavior-y: contain;
-    perspective: 1px;
-    transform-style: preserve-3d;
-    perspective-origin: right top;
+
+    // perspective: 1px;
+    // transform-style: preserve-3d;
+    // perspective-origin: right top;
     height: -webkit-fill-available;
+}
+
+.styled-scroller {
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar-thumb {
+        transition: background-color 0.5s ease-in-out;
+        background-color: rgba(0, 0, 0, 0);
+    }
+
+    &:hover::-webkit-scrollbar-thumb {
+        background-color: rgba(22, 24, 35, 0.06);
+    }
 }
 
 .menu-container {

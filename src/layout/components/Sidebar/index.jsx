@@ -66,7 +66,7 @@ const MENU_ITEMS = [
 function Sidebar() {
     return (
         <div className={cx('wrapper')}>
-            <aside className={cx('inner')}>
+            <aside className={cx('inner', 'styled-scroller')}>
                 <div className={cx('menu-container')}>
                     <Menu items={MENU_ITEMS} />
                 </div>
