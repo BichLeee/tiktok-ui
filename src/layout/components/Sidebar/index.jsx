@@ -8,7 +8,6 @@ import {
     faCompass,
     faHeartCircleCheck,
     faHouse,
-    faUser,
     faUserGroup,
     faVideo,
 } from '@fortawesome/free-solid-svg-icons';
