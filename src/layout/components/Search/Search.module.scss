@@ -38,7 +38,7 @@
 
 .input {
     background-color: transparent !important;
-    padding: 0px !important;
+    padding: 0 !important;
     font-weight: 400 !important;
     font-size: 1.6rem !important;
     line-height: 21px !important;
@@ -48,6 +48,17 @@
     &:focus {
         background-color: transparent !important;
         box-shadow: none !important;
+    }
+}
+
+.search-btn {
+    padding: 11px 20px 11px 16px;
+    margin: -12px -16px -12px 0;
+    color: rgb(22 24 35 / 34%);
+
+    svg {
+        height: 18px;
+        fill: currentcolor;
     }
 }
 
@@ -70,7 +81,7 @@
     background-color: transparent;
     width: 16px;
     height: 16px;
-    color: rgba(22, 24, 35, 0.34);
+    color: rgb(22 24 35 / 34%);
     display: flex;
     cursor: default !important;
 
@@ -83,17 +94,6 @@
     width: 0.5px;
     margin: -3px 0;
     background: var(--color-grey12);
-    margin-left: 0px !important;
+    margin-left: 0 !important;
     padding-left: 2px;
-}
-
-.search-btn {
-    padding: 11px 20px 11px 16px;
-    margin: -12px -16px -12px 0px;
-    color: rgba(22, 24, 35, 0.34);
-
-    svg {
-        height: 18px;
-        fill: currentColor;
-    }
 }

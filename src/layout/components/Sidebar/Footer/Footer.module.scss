@@ -2,7 +2,7 @@
     margin-bottom: 15px;
 
     .title {
-        color: rgba(22, 24, 35, 0.5);
+        color: rgb(22 24 35 / 50%);
         font-weight: 700;
         font-size: 1.5rem;
         cursor: pointer;
@@ -14,7 +14,7 @@
         text-decoration: none;
         margin-top: 5px;
         margin-right: 6px;
-        color: rgba(22, 24, 35, 0.5);
+        color: rgb(22 24 35 / 50%);
 
         &:hover {
             text-decoration: underline;
@@ -23,13 +23,13 @@
 
     &.active {
         .title {
-            color: rgb(22, 24, 35);
+            color: rgb(22 24 35);
         }
     }
 }
 
 .copy-right {
-    color: rgba(22, 24, 35, 0.5);
+    color: rgb(22 24 35 / 50%);
     font-weight: 600;
     font-size: 1.2rem;
     margin-right: 6px;

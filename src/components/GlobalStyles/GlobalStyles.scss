@@ -5,17 +5,17 @@
     --primary: #fe2c55;
     --white: #fff;
 
-    //Default layout
+    // Default layout
     --default-layout-header-height: 60px;
     --default-layout-width: 1150px;
 
-    //color
-    --color-grey100: rgba(22, 24, 35, 1);
-    --color-grey50: rgba(22, 24, 35, 0.5);
-    --color-grey20: rgba(22, 24, 35, 0.2);
-    --color-grey12: rgba(22, 24, 35, 0.12);
-    --color-grey6: rgba(22, 24, 35, 0.06);
-    --color-grey3: rgba(22, 24, 35, 0.03);
+    // color
+    --color-grey100: rgb(22 24 35 / 100%);
+    --color-grey50: rgb(22 24 35 / 50%);
+    --color-grey20: rgb(22 24 35 / 20%);
+    --color-grey12: rgb(22 24 35 / 12%);
+    --color-grey6: rgb(22 24 35 / 6%);
+    --color-grey3: rgb(22 24 35 / 3%);
 }
 
 * {
@@ -25,7 +25,7 @@
 }
 
 html {
-    font-size: 62.5%; //set default font-size = 10px
+    font-size: 62.5%; // set default font-size = 10px
 }
 
 // Font emmbeded
@@ -62,26 +62,26 @@ html {
 
 /* Handle */
 *::-webkit-scrollbar-thumb {
-    background-color: rgba(22, 24, 35, 0.06);
+    background-color: rgb(22 24 35 / 6%);
     border-radius: 3px;
 }
 
 body {
-    font-family: 'TikTokFont', sans-serif;
+    font-family: TikTokFont, sans-serif;
     font-style: normal;
-    font-size: 1.6rem; //--> 1rem = 10px; 1.6rem = 16px
+    font-size: 1.6rem; // --> 1rem = 10px; 1.6rem = 16px
     line-height: 1.5;
-    text-rendering: optimizeSpeed;
+    text-rendering: optimizespeed;
 
     // Custom tippy tooltip
 
     .tippy-box {
-        background-color: rgba(84, 84, 84, 0.92);
+        background-color: rgb(84 84 84 / 92%);
         border-radius: 8px;
     }
 
     .tippy-arrow::before {
-        color: rgba(84, 84, 84, 0.92);
+        color: rgb(84 84 84 / 92%);
         top: -8px !important;
     }
 }

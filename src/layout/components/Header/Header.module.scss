@@ -2,7 +2,7 @@
     --search-button-width: 24px;
 
     height: var(--default-layout-header-height, 60px);
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 1px;
+    box-shadow: rgb(0 0 0 / 12%) 0 1px 1px;
     display: flex;
     justify-content: center;
     position: sticky;
@@ -36,7 +36,7 @@
 }
 
 .custom-icon-btn {
-    border: 0px !important;
+    border: 0 !important;
     box-shadow: none !important;
 }
 
@@ -44,14 +44,15 @@
     font-size: 1.6rem !important;
     font-weight: 600 !important;
     box-shadow: none !important;
-    border-radius: 0px !important;
+    border-radius: 0 !important;
     color: var(--color-grey100) !important;
     height: 36px;
-    //padding: 0 16px !important;
+
+    // padding: 0 16px !important;
 
     &:hover {
-        background-color: rgba(22, 24, 35, 0.03) !important;
-        border: 1px solid rgba(22, 24, 35, 0.12) !important;
+        background-color: rgb(22 24 35 / 3%) !important;
+        border: 1px solid rgb(22 24 35 / 12%) !important;
     }
 }
 
@@ -76,17 +77,17 @@
 .custom-tooltip {
     font-size: 1.6rem !important;
     font-weight: 600;
-    padding: 0px;
+    padding: 0;
     background-color: transparent;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (width <= 768px) {
     .search {
         display: none;
     }
 }
 
-@media screen and (max-width: 479px) {
+@media screen and (width <= 479px) {
     .custom-upload {
         display: none;
     }

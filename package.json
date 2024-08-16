@@ -16,6 +16,7 @@
         "bootstrap": "^5.3.3",
         "classnames": "^2.5.1",
         "normalize.css": "^8.0.1",
+        "pre-commit": "^1.2.2",
         "react": "^18.2.0",
         "react-bootstrap": "^2.10.4",
         "react-dom": "^18.2.0",
@@ -27,13 +28,21 @@
         "babel-plugin-module-resolver": "^5.0.0",
         "customize-cra": "^1.0.0",
         "react-app-rewired": "^2.2.1",
-        "sass": "^1.72.0"
+        "sass": "^1.72.0",
+        "stylelint": "^16.8.2",
+        "stylelint-config-standard-scss": "^13.1.0"
     },
     "scripts": {
         "start": "react-app-rewired start",
         "build": "react-app-rewired build",
         "test": "react-app-rewired test",
-        "eject": "react-app-rewired eject"
+        "eject": "react-app-rewired eject",
+        "lint": "eslint ./src",
+        "lint:fix": "eslint --fix ./src",
+        "stylelint": "stylelint ./src/**/*.scss",
+        "stylelint:fix": "stylelint --fix ./src/**/*.scss",
+        "lint-fix-all": "npm run lint:fix && npm run stylelint:fix",
+        "lint-check-all": "npm run lint && npm run stylelint"
     },
     "eslintConfig": {
         "extends": [
@@ -52,5 +61,8 @@
             "last 1 firefox version",
             "last 1 safari version"
         ]
-    }
+    },
+    "pre-commit": [
+        "lint-check-all"
+    ]
 }

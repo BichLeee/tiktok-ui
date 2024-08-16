@@ -27,16 +27,18 @@
     }
 
     &:hover {
-        background: rgba(22, 24, 35, 0.06);
+        background: rgb(22 24 35 / 6%);
     }
 
     &.active {
         .title {
             color: var(--primary);
         }
+
         .icon {
             display: none;
         }
+
         .active-icon {
             display: block;
         }

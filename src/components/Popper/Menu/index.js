@@ -17,7 +17,7 @@ function Menu({ children, items = [] }) {
     const renderItems = () => {
         return current.data.map((item, index) => {
             if (item === 'hr') {
-                return <hr className={cx('hr')} />;
+                return <hr key={'hr'} className={cx('hr')} />;
             }
             const isParent = !!item.children;
             // undefined -> false / else true
