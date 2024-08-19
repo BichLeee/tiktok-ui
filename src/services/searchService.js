@@ -1,11 +1,14 @@
 import axiosConfig from '~/utils/request';
 
+const COUNT = 10;
+
 export const search = (query, type = 'less') => {
     try {
-        return axiosConfig.get('users/search', {
+        return axiosConfig.get('user/search', {
             params: {
-                q: query,
-                type,
+                keywords: query,
+                count: COUNT,
+                cursor: 0,
             },
         });
     } catch (err) {

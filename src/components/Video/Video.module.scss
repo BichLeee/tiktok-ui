@@ -1,0 +1,144 @@
+// video
+
+.video-wrapper {
+    position: relative;
+    flex-flow: column;
+    z-index: 0;
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.video-inner {
+    max-width: 333px;
+    width: 100%;
+}
+
+.video {
+    width: 100% !important;
+    height: calc(-100px + 100vh) !important;
+
+    video {
+        border-radius: 20px;
+
+        &::-webkit-media-controls-overlay-enclosure {
+            border-radius: 16px;
+        }
+    }
+}
+
+.footer {
+    position: absolute;
+    max-width: 333px;
+    bottom: 10px;
+    font-weight: 400;
+    font-size: 1.4rem;
+    color: rgb(255 255 255 / 90%);
+}
+
+.author {
+    padding-inline: 10px;
+    font-weight: 600;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.title {
+    padding-inline: 10px;
+}
+
+.music {
+    padding-inline: 10px;
+    color: rgb(255 255 255 / 90%);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    .icon {
+        width: 12px;
+        height: 12px;
+    }
+
+    .name {
+        font-size: 1.4rem;
+    }
+}
+
+.volume {
+    position: absolute;
+    bottom: 0;
+    right: 10px;
+}
+
+.interactive {
+    position: relative;
+    height: 0;
+    transition: height 0.5s ease;
+
+    .video-inner:hover & {
+        height: 50px;
+    }
+
+    .controls-inner {
+        position: absolute;
+        width: 100%;
+        bottom: -5px;
+        opacity: 0;
+        visibility: hidden;
+        transition:
+            opacity 0.1s ease,
+            bottom 0.5s ease;
+
+        .video-inner:hover & {
+            bottom: 5px;
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+}
+
+// Controls
+.controls-wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    padding-inline: 5px;
+
+    div {
+        position: relative;
+    }
+}
+
+.action-button {
+    background-color: transparent;
+    padding: 10px;
+
+    svg {
+        color: rgb(239 239 239);
+        width: 20px;
+        height: 20px;
+    }
+}
+
+input[type='range'] {
+    appearance: none;
+    background: rgb(255 255 255 / 50%);
+    width: 100%;
+
+    &::-webkit-slider-thumb {
+        appearance: none;
+        border: none;
+        height: 2px;
+        width: 2px;
+        border-radius: 50%;
+        margin-top: 0;
+    }
+
+    &::-webkit-slider-runnable-track {
+        height: 2px;
+    }
+}
