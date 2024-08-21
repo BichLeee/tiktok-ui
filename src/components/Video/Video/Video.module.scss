@@ -12,13 +12,14 @@
 }
 
 .video-inner {
-    max-width: 333px;
-    width: 100%;
+    width: 333px;
 }
 
 .video {
     width: 100% !important;
-    height: calc(-100px + 100vh) !important;
+
+    // height: calc(-100px + 100vh) !important;
+    height: fit-content !important;
 
     video {
         border-radius: 20px;

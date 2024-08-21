@@ -44,3 +44,11 @@
         }
     }
 }
+
+@media screen and (width <= 1071px) {
+    .item-wrapper {
+        .title {
+            display: none;
+        }
+    }
+}

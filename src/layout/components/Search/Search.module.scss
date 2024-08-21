@@ -97,3 +97,9 @@
     margin-left: 0 !important;
     padding-left: 2px;
 }
+
+@media screen and (width <= 1071px) {
+    .search [data-tippy-root] {
+        max-width: 300px;
+    }
+}

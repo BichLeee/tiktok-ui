@@ -43,12 +43,12 @@ const ITEMS = [
 
 function Footer() {
     return (
-        <>
+        <div className={cx('footer')}>
             {ITEMS.map((item) => (
                 <FooterItem key={item.title} linklist={item.linklist} title={item.title} />
             ))}
             <span className={cx('copy-right')}>© 2024 TikTok</span>
-        </>
+        </div>
     );
 }
 

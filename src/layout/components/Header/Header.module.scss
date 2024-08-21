@@ -87,6 +87,10 @@
     .search {
         display: none;
     }
+
+    .logo {
+        min-width: fit-content;
+    }
 }
 
 @media screen and (width <= 479px) {

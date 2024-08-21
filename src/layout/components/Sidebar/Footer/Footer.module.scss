@@ -35,3 +35,9 @@
     margin-right: 6px;
     margin-top: 5px;
 }
+
+@media screen and (width <= 1071px) {
+    .footer {
+        display: none;
+    }
+}

@@ -7,7 +7,7 @@
 .inner {
     width: 100%;
     max-width: 240px;
-    padding: 20px 0 26px 8px;
+    padding: 20px 8px 26px;
     position: fixed;
 
     // perspective: 1px;
@@ -50,4 +50,28 @@
     color: rgb(22 24 35 / 75%);
     padding: 0 8px;
     margin-bottom: 8px;
+}
+
+@media screen and (width <= 1071px) {
+    .wrapper {
+        max-width: 65px !important;
+        box-shadow: rgb(0 0 0 / 6%) 0 2px 8px;
+        border-right: 1px solid rgb(22 24 35 / 12%);
+    }
+
+    .inner {
+        width: 65px !important;
+    }
+
+    .styled-scroller {
+        -ms-overflow-style: none;
+
+        &::-webkit-scrollbar {
+            display: none; /* Chrome, Safari và Opera */
+        }
+    }
+
+    .following-title {
+        display: none;
+    }
 }
