@@ -1,0 +1,73 @@
+.wrapper {
+    display: flex;
+    flex-flow: row;
+    flex-wrap: nowrap;
+    gap: 20px;
+    width: fit-content;
+    margin-inline: auto;
+}
+
+.action-buttons {
+    display: flex;
+    flex-flow: column;
+    justify-content: end;
+    align-items: center;
+    gap: 10px;
+    margin-block: 20px;
+}
+
+.author {
+    position: relative;
+    margin-bottom: 12px;
+}
+
+.author-btn {
+    border-radius: 50%;
+
+    img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+    }
+}
+
+.red {
+    svg {
+        color: red;
+    }
+}
+
+.follow-btn {
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 1px solid var(--color-grey6) !important;
+
+    &.followed {
+        background-color: white;
+
+        svg {
+            color: red;
+        }
+    }
+
+    &.follow {
+        background-color: red;
+
+        svg {
+            color: white;
+        }
+    }
+}
+
+.number {
+    font-weight: 700;
+    color: var(--color-grey75);
+    font-size: 1.4rem;
+    text-align: center;
+    padding-top: 6px;
+}

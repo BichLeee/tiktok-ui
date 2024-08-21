@@ -1,14 +1,14 @@
 import axiosConfig from '~/utils/request';
 
-const COUNT = 10;
+const COUNT = 5;
+const REGION = 'us';
 
-export const search = (query) => {
+export const getTrendingVideo = () => {
     try {
-        return axiosConfig.get('user/search', {
+        return axiosConfig.get('/feed/list', {
             params: {
-                keywords: query,
+                region: REGION,
                 count: COUNT,
-                cursor: 0,
             },
         });
     } catch (err) {

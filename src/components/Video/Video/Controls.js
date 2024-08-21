@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 
 import styles from './Video.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -48,6 +48,7 @@ function Controls({ playing, setPlaying, playedSeconds, duration, playerRef }) {
                     max={duration}
                     onChange={seek}
                     ref={inputRef}
+                    className={cx('play-duration')}
                 />
             </Col>
         </Row>
