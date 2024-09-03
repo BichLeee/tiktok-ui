@@ -36,6 +36,10 @@ function Home() {
         return () => window.removeEventListener('scroll', loadMore);
     }, [fetchVideo]);
 
+    if (page === 1) {
+        fetchVideo();
+    }
+
     console.log(page);
 
     return (
