@@ -1,14 +1,11 @@
 import axiosConfig from '~/utils/request';
 
-const COUNT = 5;
-const REGION = 'us';
-
-export const getTrendingVideo = () => {
+export const getTrendingVideo = (page = 1, type = 'for-you') => {
     try {
-        return axiosConfig.get('/feed/list', {
+        return axiosConfig.get('/videos', {
             params: {
-                region: REGION,
-                count: COUNT,
+                type,
+                page,
             },
         });
     } catch (err) {

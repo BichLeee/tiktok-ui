@@ -10,15 +10,15 @@ const cx = classNames.bind(styles);
 function AccountItem({ info }) {
     return (
         <div className={cx('wrapper')}>
-            <Image className={cx('avatar')} src={info.avatarThumb} alt="" />
+            <Image className={cx('avatar')} src={info.avatar} alt="" />
             <div className={cx('info')}>
                 <div className={cx('name')}>
                     <span>{info.nickname}</span>
-                    {info.verified && (
+                    {info.tick && (
                         <FontAwesomeIcon className={cx('check-icon')} icon={faCheckCircle} />
                     )}
                 </div>
-                <span className={cx('username')}>{info.uniqueId}</span>
+                <span className={cx('username')}>{info.full_name}</span>
             </div>
         </div>
     );

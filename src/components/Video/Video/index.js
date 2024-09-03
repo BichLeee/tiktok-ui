@@ -6,7 +6,6 @@ import styles from './Video.module.scss';
 import Controls from './Controls';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMusic, faVolumeHigh, faVolumeXmark } from '@fortawesome/free-solid-svg-icons';
-import Wrapper from '../Wrapper';
 
 const cx = classNames.bind(styles);
 

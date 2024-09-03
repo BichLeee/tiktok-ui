@@ -1,3 +1,9 @@
 .wrapper {
     display: block;
 }
+
+.loading-wrapper {
+    background-color: var(--color-grey20);
+    height: 100%;
+    width: 100%;
+}

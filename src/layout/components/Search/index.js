@@ -32,7 +32,7 @@ function Search() {
 
             const res = await searchApi.search(encodeURIComponent(debounced));
             if (res.status === 200) {
-                setAccounts(res.data.data.user_list);
+                setAccounts(res.data.data);
             } else {
                 setAccounts([]);
             }
@@ -61,7 +61,7 @@ function Search() {
                         <PopperWrapper>
                             <h5 className={cx('search-title')}>Tài khoản</h5>
                             {accounts.map((account) => (
-                                <AccountItem key={account.user.id} info={account.user} />
+                                <AccountItem key={account.id} info={account} />
                             ))}
                         </PopperWrapper>
                     </div>

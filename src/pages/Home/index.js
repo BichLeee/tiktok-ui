@@ -1,62 +1,71 @@
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { getTrendingVideo } from '~/services/videoService';
 import { Video, VideoWrapper } from '~/components/Video';
 
 import classNames from 'classnames/bind';
 
 import styles from './Home.module.scss';
+import Loading from '~/components/loading';
+import { useCallback } from 'react';
 
 const cx = classNames.bind(styles);
 
 function Home() {
     const [muted, setMuted] = useState(true);
     const [videos, setVideos] = useState([]);
+    const [page, setPage] = useState(1);
 
-    const fetchVideo = async () => {
-        const res = await getTrendingVideo();
+    const fetchVideo = useCallback(async () => {
+        const res = await getTrendingVideo(page);
         if (res.status === 200) {
             setVideos((prev) => [...prev, ...res.data.data]);
+            setPage((prev) => prev + 1);
         }
-    };
-
-    useEffect(() => {
-        fetchVideo();
-    }, []);
+    }, [page]);
 
     useEffect(() => {
         const loadMore = () => {
             if (
-                window.innerHeight + document.documentElement.scrollTop >=
+                window.innerHeight + document.documentElement.scrollTop + 1 >=
                 document.documentElement.scrollHeight
             ) {
-                console.log('ending');
                 fetchVideo();
             }
         };
         window.addEventListener('scroll', loadMore);
         return () => window.removeEventListener('scroll', loadMore);
-    }, []);
+    }, [fetchVideo]);
+
+    console.log(page);
 
     return (
         <div className={cx('wrapper')}>
             {videos.map((video, index) => (
-                <VideoWrapper
-                    liked={video.digg_count}
-                    commented={video.comment_count}
-                    saved={video.download_count}
-                    shared={video.share_count}
-                    author={{ img: video.author.avatar, id: video.author.id }}
+                <Suspense
+                    fallback={
+                        <div className={cx('loading-wrapper')}>
+                            <Loading />
+                        </div>
+                    }
+                    key={`${video.id} ${index}`}
                 >
-                    <Video
-                        key={`${video.video_id} ${index}`}
-                        author={video.author.nickname}
-                        title={video.title}
-                        music_title={video.music_info.title}
-                        video_url={video.play}
-                        muted={muted}
-                        setMuted={setMuted}
-                    />
-                </VideoWrapper>
+                    <VideoWrapper
+                        liked={video.likes_count}
+                        commented={video.comments_count}
+                        saved={video.views_count}
+                        shared={video.shares_count}
+                        author={{ img: video.user.avatar, id: video.user.id }}
+                    >
+                        <Video
+                            author={video.user.nickname}
+                            title={video.description}
+                            music_title={video.music}
+                            video_url={video.file_url}
+                            muted={muted}
+                            setMuted={setMuted}
+                        />
+                    </VideoWrapper>
+                </Suspense>
             ))}
         </div>
     );
