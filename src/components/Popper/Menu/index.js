@@ -7,12 +7,15 @@ import MenuItem from './MenuItem';
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import { useUser } from '~/store/hooks';
+import { UserActions } from '~/store/user';
 
 const cx = classNames.bind(styles);
 
 function Menu({ children, items = [] }) {
     const [history, setHistory] = useState([{ data: items }]);
     const current = history[history.length - 1];
+    const [user, dispatch] = useUser();
 
     const renderItems = () => {
         return current.data.map((item, index) => {
@@ -26,9 +29,21 @@ function Menu({ children, items = [] }) {
                     <MenuItem
                         key={`${item.title}-${index}`}
                         data={item}
-                        onClick={() => setHistory((prev) => [...prev, { data: item.children }])}
+                        onClick={() =>
+                            setHistory((prev) => [
+                                ...prev,
+                                { data: item.children },
+                            ])
+                        }
                     />
                 );
+            }
+            if (item.action) {
+                <MenuItem
+                    key={`${item.title}-${index}`}
+                    data={item}
+                    onClick={() => dispatch({ name: UserActions[item.action] })}
+                />;
             }
             return <MenuItem key={`${item.title}-${index}`} data={item} />;
         });
@@ -43,7 +58,10 @@ function Menu({ children, items = [] }) {
             <PopperWrapper>
                 {history.length > 1 && (
                     <div className={cx('header')}>
-                        <button className={cx('back-btn')} onClick={handleBackBtn}>
+                        <button
+                            className={cx('back-btn')}
+                            onClick={handleBackBtn}
+                        >
                             <FontAwesomeIcon icon={faChevronLeft} />
                         </button>
                         <h3 className={cx('header-title')}>Language</h3>

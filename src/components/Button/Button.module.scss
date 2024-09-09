@@ -11,6 +11,17 @@
         // button behind
         margin-left: 16px;
     }
+
+    &:disabled {
+        color: rgb(22 24 35 / 34%);
+        background-color: rgb(22 24 35 / 6%);
+
+        &:hover {
+            color: rgb(22 24 35 / 34%);
+            background-color: rgb(22 24 35 / 6%) !important;
+            cursor: default;
+        }
+    }
 }
 
 // Button types
@@ -20,7 +31,8 @@
     color: var(--white) !important;
 
     &:hover {
-        background: linear-gradient(0deg, rgb(0 0 0 / 6%), rgb(0 0 0 / 6%)), rgb(254 44 85);
+        background: linear-gradient(0deg, rgb(0 0 0 / 6%), rgb(0 0 0 / 6%)),
+            rgb(254 44 85);
     }
 }
 

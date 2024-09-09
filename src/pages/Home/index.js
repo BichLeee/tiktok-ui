@@ -5,7 +5,7 @@ import { Video, VideoWrapper } from '~/components/Video';
 import classNames from 'classnames/bind';
 
 import styles from './Home.module.scss';
-import Loading from '~/components/loading';
+import Loading from '~/components/loader';
 import { useCallback } from 'react';
 
 const cx = classNames.bind(styles);

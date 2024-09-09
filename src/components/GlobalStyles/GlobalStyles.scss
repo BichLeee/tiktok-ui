@@ -94,6 +94,10 @@ input,
     border: none !important;
 }
 
+input:focus {
+    box-shadow: none !important;
+}
+
 a[href] {
     color: var(--color-grey100);
 }

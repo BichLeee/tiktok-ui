@@ -1,0 +1,97 @@
+.wrapper {
+    & > div,
+    & > div > div {
+        height: -webkit-fill-available;
+        max-height: 640px;
+    }
+}
+
+.header {
+    border-bottom: none !important;
+    padding-inline: 20px;
+    padding-top: 20px;
+
+    button {
+        // close button
+        background-color: rgb(22 24 35 / 3%);
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        opacity: 1;
+    }
+}
+
+.body {
+    margin-inline: 50px;
+}
+
+.title {
+    text-align: center;
+}
+
+.grey-input {
+    padding-inline-start: 12px !important;
+    padding-inline-end: unset;
+    caret-color: rgb(254 44 85);
+    width: 100%;
+    border: 1px solid rgb(22 24 35 / 12%) !important;
+    background-color: rgb(22 24 35 / 6%);
+    border-radius: 2px;
+    font-size: 1.6rem !important;
+    height: 44px;
+    text-align: left;
+
+    &:focus {
+        background-color: rgb(22 24 35 / 6%);
+    }
+}
+
+.sign-up-link {
+    color: var(--primary) !important;
+    font-weight: 600;
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.password {
+    position: relative;
+
+    .grey-input {
+        padding-inline-end: 40px !important;
+    }
+}
+
+.show-pw-btn {
+    position: absolute;
+    right: 16px;
+    top: 10px;
+    background-color: transparent;
+
+    svg {
+        filter: invert(0.5);
+    }
+}
+
+.error {
+    font-size: 1.2rem;
+    margin-top: 10px;
+    color: var(--primary);
+}
+
+.forgot-password-link {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.login-button {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.footer {
+    justify-content: center !important;
+    height: 64px;
+}
