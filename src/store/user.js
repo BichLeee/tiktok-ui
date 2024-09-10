@@ -1,35 +1,32 @@
-const { createContext, useState, useReducer } = require('react');
+import { createSlice } from '@reduxjs/toolkit';
 
-const UserContext = createContext();
-
-const initState = { email: null, data: null };
-
-const ACTIONS = {
-    LOGIN: 'login',
-    LOGOUT: 'logout',
+const initState = {
+    account: {},
+    token: null,
 };
 
-const reducer = (state, action) => {
-    switch (action.name) {
-        case ACTIONS.LOGIN:
-            return {
-                email: action.payload.email,
-                data: action.payload,
-            };
-        case ACTIONS.LOGOUT:
-            return initState;
-    }
-};
+const userSlice = createSlice({
+    name: 'user',
+    initialState: initState,
+    reducers: {
+        login: (state, action) => {
+            state.account = { ...action.payload.data };
+            state.token = action.payload.token;
 
-function UserProvider({ children }) {
-    const [user, dispatch] = useReducer(reducer, initState);
+            localStorage.setItem('user', JSON.stringify(action.payload.data));
+            localStorage.setItem('token', JSON.stringify(action.payload.token));
+        },
+        logout: (state) => {
+            state.account = initState.account;
+            state.token = initState.token;
 
-    return (
-        <UserContext.Provider value={[user, dispatch]}>
-            {children}
-        </UserContext.Provider>
-    );
-}
+            localStorage.removeItem('user');
+            localStorage.removeItem('token');
+        },
+    },
+});
 
-export { UserContext, UserProvider };
-export { ACTIONS as UserActions };
+export const { login, logout } = userSlice.actions;
+export const selectUser = (state) => state.user.account;
+
+export default userSlice.reducer;

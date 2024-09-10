@@ -8,14 +8,13 @@ import Button from '~/components/Button';
 import Loading from '~/components/loader';
 import styles from './Login.module.scss';
 import { login } from '~/services/authService';
-import { login as loginAction } from '~/store/actions';
-import { useUser } from '~/store/hooks';
-import { UserActions } from '~/store/user';
+import { useDispatch } from 'react-redux';
+import { login as loginAccount } from '~/store/user';
 
 const cx = classNames.bind(styles);
 
 function Login({ show, handleClose }) {
-    const [user, dispatch] = useUser();
+    const dispatch = useDispatch();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -34,8 +33,12 @@ function Login({ show, handleClose }) {
         try {
             setLoading(true);
             const res = await login(email, password);
+
             const data = res.data.data;
-            dispatch(loginAction({ email: data.email, data }));
+            const token = res.data.meta.token;
+
+            dispatch(loginAccount({ data, token }));
+
             setError(false);
             handleClose();
         } catch (err) {

@@ -25,7 +25,6 @@ import IconButton from '~/components/IconButton';
 import Image from '~/components/Image';
 import Search from '../Search';
 import config from '~/config';
-import { UserContext } from '~/store/user';
 import Login from '../Login';
 import { useUser } from '~/store/hooks';
 
@@ -99,14 +98,15 @@ const ACCOUNT_MENU_ITEMS = [
     {
         icon: <FontAwesomeIcon icon={faArrowRightFromBracket} />,
         title: 'Đăng xuất',
-        action: 'LOGOUT',
+        action: 'logout',
     },
 ];
 
 function Header() {
-    const [user, dispatch] = useUser();
-
     const [showLoginModal, setShowLoginModal] = useState(false);
+    const user = useUser();
+
+    console.log(user);
 
     return (
         <>
@@ -122,7 +122,7 @@ function Header() {
                         <Search />
                     </div>
                     <div className={cx('actions')}>
-                        {user.email ? (
+                        {user?.email ? (
                             <>
                                 <Button
                                     size="medium"
@@ -172,7 +172,7 @@ function Header() {
                                 <Menu items={ACCOUNT_MENU_ITEMS}>
                                     <Image
                                         className={cx('account')}
-                                        src="./avatar.webp"
+                                        src={user.avatar}
                                         alt=""
                                         fallback={images.default_avatar}
                                     />

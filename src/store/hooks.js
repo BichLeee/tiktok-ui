@@ -1,8 +1,10 @@
-import { useContext } from 'react';
-import { UserContext } from './user';
+import { useSelector } from 'react-redux';
+import { selectUser } from './user';
 
-export const useUser = () => {
-    const [user, dispatch] = useContext(UserContext);
+function useUser() {
+    const user = useSelector(selectUser);
 
-    return [user, dispatch];
-};
+    return user;
+}
+
+export { useUser };

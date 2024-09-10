@@ -1,6 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
 import { Form, InputGroup } from 'react-bootstrap';
-import { faMagnifyingGlass, faSpinner, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
+import {
+    faMagnifyingGlass,
+    faSpinner,
+    faCircleXmark,
+} from '@fortawesome/free-solid-svg-icons';
 import HeadlessTippy from '@tippyjs/react/headless';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
@@ -42,8 +46,6 @@ function Search() {
         fetchData();
     }, [debounced]);
 
-    console.log(accounts);
-
     const handleValueChange = (e) => {
         const value = e.target.value;
         if (!value.startsWith(' ')) {
@@ -57,7 +59,11 @@ function Search() {
                 visible={showResult && accounts.length > 0}
                 interactive
                 render={(attrs) => (
-                    <div className={cx('search-results')} tabIndex="-1" {...attrs}>
+                    <div
+                        className={cx('search-results')}
+                        tabIndex="-1"
+                        {...attrs}
+                    >
                         <PopperWrapper>
                             <h5 className={cx('search-title')}>Tài khoản</h5>
                             {accounts.map((account) => (
@@ -89,7 +95,10 @@ function Search() {
                         </button>
                     )}
                     {!!searchValue && loading && (
-                        <FontAwesomeIcon icon={faSpinner} className={cx('loading')} />
+                        <FontAwesomeIcon
+                            icon={faSpinner}
+                            className={cx('loading')}
+                        />
                     )}
                     <span className={cx('vertical-line')} />
 

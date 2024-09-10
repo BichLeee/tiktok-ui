@@ -1,21 +1,23 @@
 import Tippy from '@tippyjs/react/headless';
 import classNames from 'classnames/bind';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import { useDispatch } from 'react-redux';
 
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import styles from './Menu.module.scss';
 import MenuItem from './MenuItem';
-import { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
-import { useUser } from '~/store/hooks';
-import { UserActions } from '~/store/user';
+import { logout as logoutAccount } from '~/store/user';
 
 const cx = classNames.bind(styles);
 
 function Menu({ children, items = [] }) {
     const [history, setHistory] = useState([{ data: items }]);
     const current = history[history.length - 1];
-    const [user, dispatch] = useUser();
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const renderItems = () => {
         return current.data.map((item, index) => {
@@ -38,12 +40,17 @@ function Menu({ children, items = [] }) {
                     />
                 );
             }
-            if (item.action) {
-                <MenuItem
-                    key={`${item.title}-${index}`}
-                    data={item}
-                    onClick={() => dispatch({ name: UserActions[item.action] })}
-                />;
+            if (item.action === 'logout') {
+                return (
+                    <MenuItem
+                        key={`${item.title}-${index}`}
+                        data={item}
+                        onClick={() => {
+                            dispatch(logoutAccount());
+                            navigate(0);
+                        }}
+                    />
+                );
             }
             return <MenuItem key={`${item.title}-${index}`} data={item} />;
         });
