@@ -29,18 +29,25 @@ function Login({ show, handleClose }) {
         }
     };
 
-    const handleLogin = async () => {
+    const handleLogin = async (e) => {
+        e.preventDefault();
         try {
             setLoading(true);
             const res = await login(email, password);
 
-            const data = res.data.data;
-            const token = res.data.meta.token;
+            console.log(res);
 
-            dispatch(loginAccount({ data, token }));
+            if (res.status === 200) {
+                console.log(res);
 
-            setError(false);
-            handleClose();
+                const data = res.data.data;
+                const token = res.data.meta.token;
+
+                dispatch(loginAccount({ data, token }));
+
+                setError(false);
+                handleClose();
+            }
         } catch (err) {
             setError(true);
         } finally {

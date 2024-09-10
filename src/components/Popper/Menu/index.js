@@ -47,7 +47,7 @@ function Menu({ children, items = [] }) {
                         data={item}
                         onClick={() => {
                             dispatch(logoutAccount());
-                            navigate(0);
+                            //navigate(0);
                         }}
                     />
                 );
