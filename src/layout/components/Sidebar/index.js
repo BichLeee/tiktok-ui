@@ -18,65 +18,59 @@ import { useUser } from '~/store/hooks';
 import { useCallback } from 'react';
 const cx = classNames.bind(styles);
 
+const MENU_ITEMS = [
+    {
+        icon: <FontAwesomeIcon icon={faHouse} />,
+        activeIcon: <FontAwesomeIcon icon={faHouse} style={{ color: 'red' }} />,
+        title: 'Dành cho bạn',
+        to: '/',
+    },
+    {
+        icon: <FontAwesomeIcon icon={faCompass} />,
+        activeIcon: (
+            <FontAwesomeIcon icon={faCompass} style={{ color: 'red' }} />
+        ),
+        title: 'Khám phá',
+        to: '/explore',
+        disable: true,
+    },
+    {
+        icon: <FontAwesomeIcon icon={faHeartCircleCheck} />,
+        activeIcon: (
+            <FontAwesomeIcon
+                icon={faHeartCircleCheck}
+                style={{ color: 'red' }}
+            />
+        ),
+        title: 'Đang Follow',
+        to: '/following',
+        disable: true,
+    },
+    {
+        icon: <FontAwesomeIcon icon={faUserGroup} />,
+        activeIcon: (
+            <FontAwesomeIcon icon={faUserGroup} style={{ color: 'red' }} />
+        ),
+        title: 'Bạn bè',
+        to: '/friends',
+        disable: true,
+    },
+    {
+        icon: <FontAwesomeIcon icon={faVideo} />,
+        activeIcon: <FontAwesomeIcon icon={faVideo} style={{ color: 'red' }} />,
+        title: 'LIVE',
+        to: '/live',
+        disable: true,
+    },
+];
+
 function Sidebar() {
     const user = useUser();
     const avatar = user.avatar;
 
     const renderMenuItems = useCallback(
         () => [
-            {
-                icon: <FontAwesomeIcon icon={faHouse} />,
-                activeIcon: (
-                    <FontAwesomeIcon icon={faHouse} style={{ color: 'red' }} />
-                ),
-                title: 'Dành cho bạn',
-                to: '/',
-            },
-            {
-                icon: <FontAwesomeIcon icon={faCompass} />,
-                activeIcon: (
-                    <FontAwesomeIcon
-                        icon={faCompass}
-                        style={{ color: 'red' }}
-                    />
-                ),
-                title: 'Khám phá',
-                to: '/explore',
-                disable: true,
-            },
-            {
-                icon: <FontAwesomeIcon icon={faHeartCircleCheck} />,
-                activeIcon: (
-                    <FontAwesomeIcon
-                        icon={faHeartCircleCheck}
-                        style={{ color: 'red' }}
-                    />
-                ),
-                title: 'Đang Follow',
-                to: '/following',
-                disable: true,
-            },
-            {
-                icon: <FontAwesomeIcon icon={faUserGroup} />,
-                activeIcon: (
-                    <FontAwesomeIcon
-                        icon={faUserGroup}
-                        style={{ color: 'red' }}
-                    />
-                ),
-                title: 'Bạn bè',
-                to: '/friends',
-                disable: true,
-            },
-            {
-                icon: <FontAwesomeIcon icon={faVideo} />,
-                activeIcon: (
-                    <FontAwesomeIcon icon={faVideo} style={{ color: 'red' }} />
-                ),
-                title: 'LIVE',
-                to: '/live',
-                disable: true,
-            },
+            ...MENU_ITEMS,
             {
                 icon: (
                     <Image

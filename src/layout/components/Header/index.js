@@ -106,8 +106,6 @@ function Header() {
     const [showLoginModal, setShowLoginModal] = useState(false);
     const user = useUser();
 
-    console.log(user);
-
     return (
         <>
             <header className={cx('wrapper')}>
