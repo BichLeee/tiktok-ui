@@ -1,73 +1,60 @@
+import { useEffect, useState } from 'react';
+import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import MenuItem from './MenuItem';
 
 import images from '~/assets/images';
 import Image from '~/components/Image';
-
-const ACCOUNT_ICON_SAMPLE = <Image src="./avatar.webp" alt="" fallback={images.default_avatar} />;
-
-const ACCOUNTS = [
-    {
-        icon: ACCOUNT_ICON_SAMPLE,
-        activeIcon: ACCOUNT_ICON_SAMPLE,
-        title: 'Hồ sơ',
-        to: '/profile',
-        disable: true,
-    },
-    {
-        icon: ACCOUNT_ICON_SAMPLE,
-        activeIcon: ACCOUNT_ICON_SAMPLE,
-        title: 'Hồ sơ',
-        to: '/profile',
-        disable: true,
-    },
-    {
-        icon: ACCOUNT_ICON_SAMPLE,
-        activeIcon: ACCOUNT_ICON_SAMPLE,
-        title: 'Hồ sơ',
-        to: '/profile',
-        disable: true,
-    },
-    {
-        icon: ACCOUNT_ICON_SAMPLE,
-        activeIcon: ACCOUNT_ICON_SAMPLE,
-        title: 'Hồ sơ',
-        to: '/profile',
-        disable: true,
-    },
-    {
-        icon: ACCOUNT_ICON_SAMPLE,
-        activeIcon: ACCOUNT_ICON_SAMPLE,
-        title: 'Hồ sơ',
-        to: '/profile',
-        disable: true,
-    },
-    {
-        icon: ACCOUNT_ICON_SAMPLE,
-        activeIcon: ACCOUNT_ICON_SAMPLE,
-        title: 'Hồ sơ',
-        to: '/profile',
-        disable: true,
-    },
-    {
-        icon: ACCOUNT_ICON_SAMPLE,
-        activeIcon: ACCOUNT_ICON_SAMPLE,
-        title: 'Hồ sơ',
-        to: '/profile',
-        disable: true,
-    },
-];
+import { getFollowingsList } from '~/services/accountService';
 
 function SuggestedAccounts() {
+    const [accounts, setAccounts] = useState([]);
+
+    useEffect(() => {
+        const fetchAccounts = async () => {
+            const res = await getFollowingsList();
+            if (res.status === 200) {
+                setAccounts(res.data.data);
+            }
+        };
+
+        fetchAccounts();
+    }, []);
+
     return (
         <>
-            {ACCOUNTS.map((item, index) => (
+            {accounts.map((item) => (
                 <MenuItem
-                    key={`${item.title} ${index}`}
-                    icon={item.icon}
-                    activeIcon={item.activeIcon}
-                    title={item.title}
-                    to={item.to}
-                    disable={item.disable}
+                    key={item.id + 'sb'}
+                    icon={
+                        <Image
+                            src={item.avatar}
+                            alt=""
+                            fallback={images.default_avatar}
+                        />
+                    }
+                    activeIcon={
+                        <Image
+                            src={item.avatar}
+                            alt=""
+                            fallback={images.default_avatar}
+                        />
+                    }
+                    title={
+                        <>
+                            {item.nickname}{' '}
+                            {item.tick && (
+                                <FontAwesomeIcon
+                                    className={'check-icon'}
+                                    icon={faCheckCircle}
+                                />
+                            )}
+                        </>
+                    }
+                    subTitle={`${item.first_name} ${item.last_name}`}
+                    to={`/${item.id}`}
+                    disable={true}
                 />
             ))}
         </>

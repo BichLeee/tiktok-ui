@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Form,Modal } from 'react-bootstrap';
+import { Form, Modal } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { faEye, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,7 +9,7 @@ import styles from './Login.module.scss';
 
 import Button from '~/components/Button';
 import Loading from '~/components/loader';
-import { login } from '~/services/authService';
+import { login, signup } from '~/services/authService';
 import { login as loginAccount } from '~/store/user';
 
 const cx = classNames.bind(styles);
@@ -24,36 +24,55 @@ function Login({ show, handleClose }) {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
 
+    const [isRegister, setIsRegister] = useState(false);
+
     const hideError = () => {
         if (error) {
             setError(false);
         }
     };
 
-    const handleLogin = async (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            setLoading(true);
-            const res = await login(email, password);
+        if (isRegister) {
+            try {
+                setLoading(true);
+                const res = await signup(email, password);
 
-            console.log(res);
-
-            if (res.status === 200) {
-                console.log(res);
-
-                const data = res.data.data;
-                const token = res.data.meta.token;
-
-                dispatch(loginAccount({ data, token }));
-
-                setError(false);
-                handleClose();
+                if (res.status === 200) {
+                    setIsRegister(false);
+                    setError(false);
+                }
+            } catch (err) {
+                setError(true);
+            } finally {
+                setLoading(false);
             }
-        } catch (err) {
-            setError(true);
-        } finally {
-            setLoading(false);
+        } else {
+            try {
+                setLoading(true);
+                const res = await login(email, password);
+
+                if (res.status === 200) {
+                    const data = res.data.data;
+                    const token = res.data.meta.token;
+
+                    dispatch(loginAccount({ data, token }));
+
+                    setError(false);
+                    handleClose();
+                }
+            } catch (err) {
+                setError(true);
+            } finally {
+                setLoading(false);
+            }
         }
+    };
+
+    const changeForm = (e) => {
+        e.preventDefault();
+        setIsRegister((prev) => !prev);
     };
 
     return (
@@ -67,9 +86,9 @@ function Login({ show, handleClose }) {
             <Modal.Header closeButton className={cx('header')} />
             <Modal.Body className={cx('body')}>
                 <h1 className={cx('title')}>
-                    <b>Đăng nhập</b>
+                    <b>{isRegister ? 'Đăng ký' : 'Đăng nhập'}</b>
                 </h1>
-                <Form onSubmit={handleLogin}>
+                <Form onSubmit={handleSubmit}>
                     <Form.Group className="mb-3" controlId="email">
                         <Form.Label>Email</Form.Label>
                         <Form.Control
@@ -109,12 +128,16 @@ function Login({ show, handleClose }) {
                     </Form.Group>
                     {error && (
                         <div className={cx('error')}>
-                            Sai tài khoản hoặc mật khẩu. Hãy thử lại.
+                            {isRegister
+                                ? 'Email đã tồn tại.'
+                                : 'Sai tài khoản hoặc mật khẩu. Hãy thử lại.'}
                         </div>
                     )}
-                    <a href="#" className={cx('forgot-password-link')}>
-                        Quên mật khẩu?
-                    </a>
+                    {!isRegister && (
+                        <a href="#" className={cx('forgot-password-link')}>
+                            Quên mật khẩu?
+                        </a>
+                    )}
                     <Button
                         primary={email !== '' && password != ''}
                         size="large"
@@ -122,17 +145,40 @@ function Login({ show, handleClose }) {
                         disabled={email == '' || password == ''}
                         type="submit"
                     >
-                        {loading ? <Loading /> : 'Đăng nhập'}
+                        {loading ? (
+                            <Loading />
+                        ) : isRegister ? (
+                            'Đăng ký'
+                        ) : (
+                            'Đăng nhập'
+                        )}
                     </Button>
                 </Form>
             </Modal.Body>
             <Modal.Footer className={cx('footer')}>
-                <p>
-                    Bạn không có tài khoản?{' '}
-                    <a href="#" className={cx('sign-up-link')}>
-                        Đăng ký
-                    </a>
-                </p>
+                {isRegister ? (
+                    <p>
+                        Bạn đã có tài khoản?{' '}
+                        <a
+                            href="#"
+                            className={cx('sign-up-link')}
+                            onClick={changeForm}
+                        >
+                            Đăng nhập
+                        </a>
+                    </p>
+                ) : (
+                    <p>
+                        Bạn không có tài khoản?{' '}
+                        <a
+                            href="#"
+                            className={cx('sign-up-link')}
+                            onClick={changeForm}
+                        >
+                            Đăng ký
+                        </a>
+                    </p>
+                )}
             </Modal.Footer>
         </Modal>
     );

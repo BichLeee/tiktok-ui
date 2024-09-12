@@ -13,13 +13,24 @@ import classNames from 'classnames/bind';
 import styles from './Wrapper.module.scss';
 
 import IconButton from '~/components/IconButton';
+import { followUser, unfollowUser } from '~/services/accountService';
 
 const cx = classNames.bind(styles);
 
-function Wrapper({ liked, commented, saved, shared, author, children }) {
-    const [followed, setFollowed] = useState(false);
-    const [isLiked, setIsLiked] = useState(false);
-    const [isSaved, setIsSaved] = useState(false);
+function Wrapper({
+    followed,
+    liked,
+    saved,
+    likeNumber,
+    commentNumber,
+    saveNumber,
+    shareNumber,
+    author,
+    children,
+}) {
+    const [isfollowed, setIsFollowed] = useState(followed);
+    const [isLiked, setIsLiked] = useState(liked);
+    const [isSaved, setIsSaved] = useState(saved);
 
     const formatNumberToString = (number) => {
         if (number >= 1000000) {
@@ -29,19 +40,36 @@ function Wrapper({ liked, commented, saved, shared, author, children }) {
         }
         return number;
     };
+
+    const handleFollow = async () => {
+        if (isfollowed === true) {
+            await unfollowUser(author.id);
+            setIsFollowed(false);
+        } else {
+            await followUser(author.id);
+            setIsFollowed(true);
+        }
+    };
+
     return (
         <div className={cx('wrapper')}>
             {children}
             <div className={cx('action-buttons')}>
                 <div className={cx('author')}>
-                    <button className={cx('author-btn')} onClick={() => console.log(author.id)}>
+                    <button
+                        className={cx('author-btn')}
+                        onClick={() => console.log(author.id)}
+                    >
                         <img src={author.img} />
                     </button>
                     <button
-                        className={cx('follow-btn', followed ? 'followed' : 'follow')}
-                        onClick={() => setFollowed((prev) => !prev)}
+                        className={cx(
+                            'follow-btn',
+                            isfollowed ? 'followed' : 'follow',
+                        )}
+                        onClick={handleFollow}
                     >
-                        {followed ? (
+                        {isfollowed ? (
                             <FontAwesomeIcon icon={faCheck} />
                         ) : (
                             <FontAwesomeIcon icon={faPlus} />
@@ -57,26 +85,44 @@ function Wrapper({ liked, commented, saved, shared, author, children }) {
                             setIsLiked((prev) => !prev);
                         }}
                     />
-                    <div className={cx('number')}>{formatNumberToString(liked)}</div>
-                </div>
-                <div>
-                    <IconButton secondary icon={<FontAwesomeIcon icon={faCommentDots} />} />
-                    <div className={cx('number')}>{formatNumberToString(commented)}</div>
+                    <div className={cx('number')}>
+                        {formatNumberToString(
+                            isLiked ? likeNumber + 1 : likeNumber,
+                        )}
+                    </div>
                 </div>
                 <div>
                     <IconButton
                         secondary
-                        className={cx(isSaved && 'red')}
+                        icon={<FontAwesomeIcon icon={faCommentDots} />}
+                    />
+                    <div className={cx('number')}>
+                        {formatNumberToString(commentNumber)}
+                    </div>
+                </div>
+                <div>
+                    <IconButton
+                        secondary
+                        className={cx(isSaved && 'yellow')}
                         icon={<FontAwesomeIcon icon={faBookmark} />}
                         onClick={() => {
                             setIsSaved((prev) => !prev);
                         }}
                     />
-                    <div className={cx('number')}>{formatNumberToString(saved)}</div>
+                    <div className={cx('number')}>
+                        {formatNumberToString(
+                            isSaved ? saveNumber + 1 : saveNumber,
+                        )}
+                    </div>
                 </div>
                 <div>
-                    <IconButton secondary icon={<FontAwesomeIcon icon={faShare} />} />
-                    <div className={cx('number')}>{formatNumberToString(shared)}</div>
+                    <IconButton
+                        secondary
+                        icon={<FontAwesomeIcon icon={faShare} />}
+                    />
+                    <div className={cx('number')}>
+                        {formatNumberToString(shareNumber)}
+                    </div>
                 </div>
             </div>
         </div>

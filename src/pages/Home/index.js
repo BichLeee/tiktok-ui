@@ -46,10 +46,13 @@ function Home() {
                         key={`${video.id} ${index}`}
                     >
                         <VideoWrapper
-                            liked={video.likes_count}
-                            commented={video.comments_count}
-                            saved={video.views_count}
-                            shared={video.shares_count}
+                            followed={video.user.is_followed}
+                            liked={video.is_liked}
+                            saved={false}
+                            likeNumber={video.likes_count}
+                            commentNumber={video.comments_count}
+                            saveNumber={video.views_count}
+                            shareNumber={video.shares_count}
                             author={{
                                 img: video.user.avatar,
                                 id: video.user.id,

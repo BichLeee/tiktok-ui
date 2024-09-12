@@ -4,7 +4,15 @@ import classNames from 'classnames/bind';
 import styles from './Menu.module.scss';
 const cx = classNames.bind(styles);
 
-function MenuItem({ icon, activeIcon, title, to, onClick, disable }) {
+function MenuItem({
+    icon,
+    activeIcon,
+    title,
+    subTitle = '',
+    to,
+    onClick,
+    disable,
+}) {
     const handleClick = (e) => {
         if (disable) {
             e.preventDefault();
@@ -25,7 +33,10 @@ function MenuItem({ icon, activeIcon, title, to, onClick, disable }) {
         >
             <span className={cx('icon')}>{icon}</span>
             <span className={cx('active-icon')}>{activeIcon}</span>
-            <span className={cx('title')}>{title}</span>
+            <div className={subTitle && cx('account-name')}>
+                <div className={cx('title')}>{title}</div>
+                {subTitle && <div className={cx('sub-title')}>{subTitle}</div>}
+            </div>
         </NavLink>
     );
 }

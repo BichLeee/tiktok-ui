@@ -1,3 +1,17 @@
+.account-name {
+    display: flex;
+    flex-flow: column;
+
+    .title {
+        font-size: 1.6rem;
+    }
+
+    .sub-title {
+        font-size: 1.2rem;
+        color: var(--color-grey75);
+    }
+}
+
 .item-wrapper {
     display: flex;
     padding: 8px;
@@ -17,13 +31,13 @@
         border-radius: 50%;
     }
 
-    .active-icon {
-        display: none;
-    }
-
     .title {
         font-size: 1.8rem;
         font-weight: 700;
+    }
+
+    .active-icon {
+        display: none;
     }
 
     &:hover {
@@ -45,8 +59,16 @@
     }
 }
 
+.check-icon {
+    margin-left: 6px;
+    height: 14px;
+    width: 14px;
+    color: rgb(53 225 225 / 100%);
+}
+
 @media screen and (width <= 1071px) {
     .item-wrapper {
+        .account-name,
         .title {
             display: none;
         }
