@@ -1,10 +1,11 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route,Routes } from 'react-router-dom';
 
-import { publicRoutes } from '~/routes';
-import { DefaultLayout } from '~/layout';
 import { login as loginAccount } from './store/user';
+
+import { DefaultLayout } from '~/layout';
+import { publicRoutes } from '~/routes';
 
 function App() {
     const dispatch = useDispatch();

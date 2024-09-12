@@ -1,10 +1,10 @@
-import classNames from 'classnames/bind';
+import { useEffect, useRef } from 'react';
 import { Col, Row } from 'react-bootstrap';
+import { faPause, faPlay } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classNames from 'classnames/bind';
 
 import styles from './Video.module.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPause, faPlay } from '@fortawesome/free-solid-svg-icons';
-import { useEffect, useRef } from 'react';
 
 const cx = classNames.bind(styles);
 

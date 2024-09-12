@@ -1,15 +1,17 @@
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Tippy from '@tippyjs/react/headless';
 import classNames from 'classnames/bind';
-import { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
-import { useDispatch } from 'react-redux';
+
+import MenuItem from './MenuItem';
+
+import styles from './Menu.module.scss';
 
 import { Wrapper as PopperWrapper } from '~/components/Popper';
-import styles from './Menu.module.scss';
-import MenuItem from './MenuItem';
-import { logout as logoutAccount } from '~/store/user';
 import { useUser } from '~/store/hooks';
+import { logout as logoutAccount } from '~/store/user';
 
 const cx = classNames.bind(styles);
 

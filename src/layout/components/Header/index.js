@@ -1,35 +1,37 @@
-import classNames from 'classnames/bind';
 import { useContext, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBell, faMessage } from '@fortawesome/free-regular-svg-icons';
 import {
-    faEllipsisVertical,
-    faEarthAfrica,
-    faSeedling,
+    faArrowRightFromBracket,
     faCircleQuestion,
+    faEarthAfrica,
+    faEllipsisVertical,
+    faGear,
     faMoon,
     faPlus,
+    faSeedling,
     faUser,
-    faGear,
-    faArrowRightFromBracket,
 } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Tippy from '@tippyjs/react';
-import 'tippy.js/dist/tippy.css';
+import classNames from 'classnames/bind';
 
+import Login from '../Login';
+import Search from '../Search';
+
+import 'tippy.js/dist/tippy.css';
 import styles from './Header.module.scss';
+
 import images from '~/assets/images';
 import Button from '~/components/Button';
-import Menu from '~/components/Popper/Menu';
-import { faBell, faMessage } from '@fortawesome/free-regular-svg-icons';
 import IconButton from '~/components/IconButton';
 import Image from '~/components/Image';
-import Search from '../Search';
+import Menu from '~/components/Popper/Menu';
 import config from '~/config';
-import Login from '../Login';
-import { logout as logoutAccount } from '~/store/user';
-import { useUser } from '~/store/hooks';
-import { useDispatch } from 'react-redux';
 import { logout } from '~/services/authService';
+import { useUser } from '~/store/hooks';
+import { logout as logoutAccount } from '~/store/user';
 
 const cx = classNames.bind(styles);
 

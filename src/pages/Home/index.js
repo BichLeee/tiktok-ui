@@ -1,14 +1,14 @@
 import { Suspense, useEffect, useState } from 'react';
-import { getTrendingVideo } from '~/services/videoService';
-import { Video, VideoWrapper } from '~/components/Video';
-
+import { useCallback } from 'react';
+import InfiniteScroll from 'react-infinite-scroller';
 import classNames from 'classnames/bind';
 
 import styles from './Home.module.scss';
+
 import Loading from '~/components/loader';
-import { useCallback } from 'react';
-import InfiniteScroll from 'react-infinite-scroller';
 import Loader from '~/components/loader';
+import { Video, VideoWrapper } from '~/components/Video';
+import { getTrendingVideo } from '~/services/videoService';
 
 const cx = classNames.bind(styles);
 

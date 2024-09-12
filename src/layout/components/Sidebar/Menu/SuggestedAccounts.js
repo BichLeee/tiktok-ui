@@ -1,6 +1,7 @@
-import Image from '~/components/Image';
 import MenuItem from './MenuItem';
+
 import images from '~/assets/images';
+import Image from '~/components/Image';
 
 const ACCOUNT_ICON_SAMPLE = <Image src="./avatar.webp" alt="" fallback={images.default_avatar} />;
 

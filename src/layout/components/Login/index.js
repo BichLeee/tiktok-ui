@@ -1,14 +1,15 @@
-import classNames from 'classnames/bind';
 import { useState } from 'react';
-import { Modal, Form } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Form,Modal } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
 import { faEye, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classNames from 'classnames/bind';
+
+import styles from './Login.module.scss';
 
 import Button from '~/components/Button';
 import Loading from '~/components/loader';
-import styles from './Login.module.scss';
 import { login } from '~/services/authService';
-import { useDispatch } from 'react-redux';
 import { login as loginAccount } from '~/store/user';
 
 const cx = classNames.bind(styles);

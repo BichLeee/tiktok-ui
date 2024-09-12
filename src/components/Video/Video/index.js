@@ -1,11 +1,12 @@
-import classNames from 'classnames/bind';
 import { useEffect, useRef, useState } from 'react';
 import ReactPlayer from 'react-player';
+import { faMusic, faVolumeHigh, faVolumeXmark } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classNames from 'classnames/bind';
+
+import Controls from './Controls';
 
 import styles from './Video.module.scss';
-import Controls from './Controls';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMusic, faVolumeHigh, faVolumeXmark } from '@fortawesome/free-solid-svg-icons';
 
 const cx = classNames.bind(styles);
 

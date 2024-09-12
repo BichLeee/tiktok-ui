@@ -1,6 +1,4 @@
-import classNames from 'classnames/bind';
 import { useCallback, useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faCompass,
     faHeartCircleCheck,
@@ -8,14 +6,19 @@ import {
     faUserGroup,
     faVideo,
 } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classNames from 'classnames/bind';
+
+import Login from '../Login';
+
+import Footer from './Footer';
+import Menu, { SuggestedAccounts } from './Menu';
 
 import styles from './Sidebar.module.scss';
+
 import images from '~/assets/images';
 import Image from '~/components/Image';
 import { useUser } from '~/store/hooks';
-import Footer from './Footer';
-import Menu, { SuggestedAccounts } from './Menu';
-import Login from '../Login';
 
 const cx = classNames.bind(styles);
 

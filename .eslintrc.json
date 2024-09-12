@@ -2,12 +2,36 @@
     "env": {
         "browser": true
     },
-    "plugins": ["@typescript-eslint", "react", "prettier", "simple-import-sort"],
+    "plugins": [
+        "@typescript-eslint",
+        "react",
+        "prettier",
+        "simple-import-sort"
+    ],
     "parser": "@typescript-eslint/parser",
     "rules": {
         "no-undef": "off",
         "react/prop-types": "off",
-        "react/react-in-jsx-scope": "off"
+        "react/react-in-jsx-scope": "off",
+        "simple-import-sort/imports": [
+            "error",
+            {
+                "groups": [
+                    // Packages `react` related packages come first.
+                    ["^react", "^@?\\w"],
+                    // Internal packages.
+                    ["^(@|src)(/.*|$)"],
+                    // Side effect imports.
+                    ["^\\u0000"],
+                    // Parent imports. Put `..` last.
+                    ["^\\.\\.(?!/?$)", "^\\.\\./?$"],
+                    // Other relative imports. Put same-folder imports and `.` last.
+                    ["^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"],
+                    // Style imports.
+                    ["^.+\\.?(css)$"]
+                ]
+            }
+        ]
     },
     "settings": {
         "react": {

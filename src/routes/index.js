@@ -1,11 +1,10 @@
 //Layout
-import { HeaderOnlyLayout, DefaultLayout } from '~/layout';
-
-import Home from '~/pages/Home';
+import config from '~/config';
+import { DefaultLayout,HeaderOnlyLayout } from '~/layout';
 import Following from '~/pages/Following';
+import Home from '~/pages/Home';
 import Profile from '~/pages/Profile';
 import Upload from '~/pages/Upload';
-import config from '~/config';
 
 const publicRoutes = [
     { path: config.routes.home, component: Home, layout: DefaultLayout },

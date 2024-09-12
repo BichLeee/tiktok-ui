@@ -1,5 +1,5 @@
-import classNames from 'classnames/bind';
 import { Link } from 'react-router-dom';
+import classNames from 'classnames/bind';
 
 import styles from './IconButton.module.scss';
 

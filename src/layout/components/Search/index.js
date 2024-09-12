@@ -1,18 +1,19 @@
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef,useState } from 'react';
 import { Form, InputGroup } from 'react-bootstrap';
 import {
+    faCircleXmark,
     faMagnifyingGlass,
     faSpinner,
-    faCircleXmark,
 } from '@fortawesome/free-solid-svg-icons';
-import HeadlessTippy from '@tippyjs/react/headless';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import HeadlessTippy from '@tippyjs/react/headless';
 import classNames from 'classnames/bind';
 
 import styles from './Search.module.scss';
-import { useDebounce } from '~/hooks';
-import { Wrapper as PopperWrapper } from '~/components/Popper';
+
 import AccountItem from '~/components/AccountItem';
+import { Wrapper as PopperWrapper } from '~/components/Popper';
+import { useDebounce } from '~/hooks';
 import * as searchApi from '~/services/searchService';
 
 const cx = classNames.bind(styles);

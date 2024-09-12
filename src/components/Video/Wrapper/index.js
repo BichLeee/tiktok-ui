@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
     faBookmark,
     faCheck,
@@ -10,8 +11,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
 
 import styles from './Wrapper.module.scss';
+
 import IconButton from '~/components/IconButton';
-import { useState } from 'react';
 
 const cx = classNames.bind(styles);
 

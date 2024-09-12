@@ -1,9 +1,10 @@
-import classNames from 'classnames/bind';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classNames from 'classnames/bind';
+
+import Image from '../Image';
 
 import styles from './AccountItem.module.scss';
-import Image from '../Image';
 
 const cx = classNames.bind(styles);
 
