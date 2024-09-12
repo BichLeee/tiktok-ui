@@ -1,8 +1,5 @@
-import Menu, { SuggestedAccounts } from './Menu';
-
 import classNames from 'classnames/bind';
-
-import styles from './Sidebar.module.scss';
+import { useCallback, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faCompass,
@@ -11,11 +8,15 @@ import {
     faUserGroup,
     faVideo,
 } from '@fortawesome/free-solid-svg-icons';
+
+import styles from './Sidebar.module.scss';
 import images from '~/assets/images';
 import Image from '~/components/Image';
-import Footer from './Footer';
 import { useUser } from '~/store/hooks';
-import { useCallback } from 'react';
+import Footer from './Footer';
+import Menu, { SuggestedAccounts } from './Menu';
+import Login from '../Login';
+
 const cx = classNames.bind(styles);
 
 const MENU_ITEMS = [
@@ -24,6 +25,7 @@ const MENU_ITEMS = [
         activeIcon: <FontAwesomeIcon icon={faHouse} style={{ color: 'red' }} />,
         title: 'Dành cho bạn',
         to: '/',
+        auth: false,
     },
     {
         icon: <FontAwesomeIcon icon={faCompass} />,
@@ -33,6 +35,7 @@ const MENU_ITEMS = [
         title: 'Khám phá',
         to: '/explore',
         disable: true,
+        auth: false,
     },
     {
         icon: <FontAwesomeIcon icon={faHeartCircleCheck} />,
@@ -44,7 +47,8 @@ const MENU_ITEMS = [
         ),
         title: 'Đang Follow',
         to: '/following',
-        disable: true,
+        disable: false,
+        auth: false,
     },
     {
         icon: <FontAwesomeIcon icon={faUserGroup} />,
@@ -54,6 +58,7 @@ const MENU_ITEMS = [
         title: 'Bạn bè',
         to: '/friends',
         disable: true,
+        auth: true,
     },
     {
         icon: <FontAwesomeIcon icon={faVideo} />,
@@ -61,6 +66,7 @@ const MENU_ITEMS = [
         title: 'LIVE',
         to: '/live',
         disable: true,
+        auth: false,
     },
 ];
 
@@ -68,9 +74,13 @@ function Sidebar() {
     const user = useUser();
     const avatar = user.avatar;
 
+    const [show, setShow] = useState(false);
+
     const renderMenuItems = useCallback(
         () => [
-            ...MENU_ITEMS,
+            ...MENU_ITEMS.filter(
+                (item) => !item.auth || (item.auth && user.email),
+            ),
             {
                 icon: (
                     <Image
@@ -88,31 +98,41 @@ function Sidebar() {
                 ),
                 title: 'Hồ sơ',
                 to: '/profile',
-                disable: true,
+                ...(!user.email && { onClick: () => setShow(true) }),
+                disable: false,
             },
         ],
         [avatar],
     );
 
     return (
-        <div className={cx('wrapper')}>
-            <aside className={cx('inner', 'styled-scroller')}>
-                <div className={cx('menu-container')}>
-                    <Menu items={renderMenuItems()} />
-                </div>
-                <div className={cx('hr')} />
-                <div className={cx('following-container')}>
-                    <span className={cx('following-title')}>
-                        Các tài khoản đang follow
-                    </span>
-                    <SuggestedAccounts />
-                </div>
-                <div className={cx('hr')} />
-                <div className={cx('following-container')}>
-                    <Footer />
-                </div>
-            </aside>
-        </div>
+        <>
+            <div className={cx('wrapper')}>
+                <aside className={cx('inner', 'styled-scroller')}>
+                    <div className={cx('menu-container')}>
+                        <Menu items={renderMenuItems()} />
+                    </div>
+
+                    {user.email && (
+                        <>
+                            <div className={cx('hr')} />
+                            <div className={cx('following-container')}>
+                                <span className={cx('following-title')}>
+                                    Các tài khoản đang follow
+                                </span>
+                                <SuggestedAccounts />
+                            </div>
+                        </>
+                    )}
+
+                    <div className={cx('hr')} />
+                    <div className={cx('following-container')}>
+                        <Footer />
+                    </div>
+                </aside>
+            </div>
+            <Login show={show} handleClose={() => setShow(false)} />
+        </>
     );
 }
 

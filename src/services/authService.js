@@ -6,3 +6,7 @@ export const login = (email, password) => {
         password,
     });
 };
+
+export const logout = () => {
+    return axiosConfig.post('/auth/logout');
+};

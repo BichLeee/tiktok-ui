@@ -1,7 +1,6 @@
 import Tippy from '@tippyjs/react/headless';
 import classNames from 'classnames/bind';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch } from 'react-redux';
@@ -10,6 +9,7 @@ import { Wrapper as PopperWrapper } from '~/components/Popper';
 import styles from './Menu.module.scss';
 import MenuItem from './MenuItem';
 import { logout as logoutAccount } from '~/store/user';
+import { useUser } from '~/store/hooks';
 
 const cx = classNames.bind(styles);
 
@@ -17,15 +17,23 @@ function Menu({ children, items = [] }) {
     const [history, setHistory] = useState([{ data: items }]);
     const current = history[history.length - 1];
     const dispatch = useDispatch();
-    const navigate = useNavigate();
+
+    const user = useUser();
 
     const renderItems = () => {
         return current.data.map((item, index) => {
-            if (item === 'hr') {
+            // auth
+            if (item.auth && !user.email) {
+                return;
+            }
+
+            // line
+            if (item.title === 'hr') {
                 return <hr key={'hr'} className={cx('hr')} />;
             }
+
             const isParent = !!item.children;
-            // undefined -> false / else true
+
             if (isParent) {
                 return (
                     <MenuItem
@@ -40,15 +48,12 @@ function Menu({ children, items = [] }) {
                     />
                 );
             }
-            if (item.action === 'logout') {
+            if (item.onClick) {
                 return (
                     <MenuItem
                         key={`${item.title}-${index}`}
                         data={item}
-                        onClick={() => {
-                            dispatch(logoutAccount());
-                            //navigate(0);
-                        }}
+                        onClick={item.onClick}
                     />
                 );
             }

@@ -4,10 +4,16 @@ import styles from './Menu.module.scss';
 import { NavLink } from 'react-router-dom';
 const cx = classNames.bind(styles);
 
-function MenuItem({ icon, activeIcon, title, to, disable }) {
+function MenuItem({ icon, activeIcon, title, to, onClick, disable }) {
     const handleClick = (e) => {
         if (disable) {
             e.preventDefault();
+            return;
+        }
+        if (onClick) {
+            e.preventDefault();
+            onClick();
+            console.log(true);
         }
     };
 

@@ -26,43 +26,28 @@ import Image from '~/components/Image';
 import Search from '../Search';
 import config from '~/config';
 import Login from '../Login';
+import { logout as logoutAccount } from '~/store/user';
 import { useUser } from '~/store/hooks';
+import { useDispatch } from 'react-redux';
+import { logout } from '~/services/authService';
 
 const cx = classNames.bind(styles);
 
-const MORE_MENU_ITEMS = [
-    {
-        icon: <FontAwesomeIcon icon={faSeedling} />,
-        title: 'Công cụ dành cho nhà sáng tạo',
-    },
-    {
-        icon: <FontAwesomeIcon icon={faEarthAfrica} />,
-        title: 'Tiếng Việt',
-        children: [
-            { code: 'en', title: 'English' },
-            { code: 'vi', title: 'Tiếng Việt' },
-        ],
-    },
-    {
-        icon: <FontAwesomeIcon icon={faCircleQuestion} />,
-        title: 'Phản hồi và trợ giúp',
-        to: '/feedback',
-    },
-    { icon: <FontAwesomeIcon icon={faMoon} />, title: 'Chế độ tối' },
-];
-
-const ACCOUNT_MENU_ITEMS = [
+const MENU_ITEMS = [
     {
         icon: <FontAwesomeIcon icon={faUser} />,
         title: 'Xem hồ sơ',
+        auth: true,
     },
     {
         icon: <FontAwesomeIcon icon={faSeedling} />,
         title: 'Công cụ dành cho nhà sáng tạo',
+        auth: false,
     },
     {
         icon: <FontAwesomeIcon icon={faGear} />,
-        title: 'Công cụ dành cho nhà sáng tạo',
+        title: 'Cài đặt',
+        auth: true,
     },
     {
         icon: <FontAwesomeIcon icon={faEarthAfrica} />,
@@ -87,24 +72,46 @@ const ACCOUNT_MENU_ITEMS = [
             { code: 'en', title: 'English' },
             { code: 'vi', title: 'Tiếng Việt' },
         ],
+        auth: false,
     },
     {
         icon: <FontAwesomeIcon icon={faCircleQuestion} />,
         title: 'Phản hồi và trợ giúp',
         to: '/feedback',
+        auth: false,
     },
-    { icon: <FontAwesomeIcon icon={faMoon} />, title: 'Chế độ tối' },
-    'hr',
     {
-        icon: <FontAwesomeIcon icon={faArrowRightFromBracket} />,
-        title: 'Đăng xuất',
-        action: 'logout',
+        icon: <FontAwesomeIcon icon={faMoon} />,
+        title: 'Chế độ tối',
+        auth: false,
+    },
+    {
+        title: 'hr',
+        auth: true,
     },
 ];
 
 function Header() {
     const [showLoginModal, setShowLoginModal] = useState(false);
     const user = useUser();
+    const dispatch = useDispatch();
+
+    const renderMenuItems = () => [
+        ...MENU_ITEMS,
+        {
+            icon: <FontAwesomeIcon icon={faArrowRightFromBracket} />,
+            title: 'Đăng xuất',
+            auth: true,
+            onClick: async () => {
+                try {
+                    const res = await logout();
+                    dispatch(logoutAccount());
+                } catch (err) {
+                    console.log(err);
+                }
+            },
+        },
+    ];
 
     return (
         <>
@@ -167,7 +174,7 @@ function Header() {
                                         />
                                     </div>
                                 </Tippy>
-                                <Menu items={ACCOUNT_MENU_ITEMS}>
+                                <Menu items={renderMenuItems()}>
                                     <Image
                                         className={cx('account')}
                                         src={user.avatar}
@@ -187,7 +194,7 @@ function Header() {
                                 >
                                     Đăng nhập
                                 </Button>
-                                <Menu items={MORE_MENU_ITEMS}>
+                                <Menu items={MENU_ITEMS}>
                                     <button className={cx('more-btn')}>
                                         <FontAwesomeIcon
                                             icon={faEllipsisVertical}
