@@ -1,12 +1,9 @@
-import { Suspense, useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useCallback } from 'react';
-import InfiniteScroll from 'react-infinite-scroller';
 import classNames from 'classnames/bind';
 
 import styles from './Home.module.scss';
 
-import Loading from '~/components/loader';
-import Loader from '~/components/loader';
 import { Video, VideoWrapper } from '~/components/Video';
 import { getTrendingVideo } from '~/services/videoService';
 
@@ -16,6 +13,9 @@ function Home() {
     const [muted, setMuted] = useState(true);
     const [videos, setVideos] = useState([]);
     const [page, setPage] = useState(1);
+    const [viewing, setViewing] = useState(0);
+
+    const refVideos = useRef();
 
     const fetchVideo = useCallback(async () => {
         const res = await getTrendingVideo(page);
@@ -26,24 +26,60 @@ function Home() {
         }
     }, [page]);
 
+    const handleScroll = (e) => {
+        if (e.deltaY < 0) {
+            // scrolling up
+            if (viewing > 0) {
+                setViewing((prev) => prev - 1);
+            }
+        } else if (e.deltaY > 0) {
+            // scrolling down
+            if (viewing > videos.length - 1) {
+                setPage((prev) => prev + 1);
+                fetchVideo();
+            }
+            setViewing((prev) => prev + 1);
+        }
+    };
+
+    function debounce(func, delay) {
+        let timeout;
+        return function (...args) {
+            const context = this;
+            clearTimeout(timeout);
+            timeout = setTimeout(() => func.apply(context, args), delay);
+        };
+    }
+
+    const debouncedHandleScroll = debounce(handleScroll, 80);
+
+    useEffect(() => {
+        fetchVideo();
+    }, []);
+
+    useEffect(() => {
+        if (refVideos.current && refVideos.current.children[viewing]) {
+            setTimeout(() => {
+                const comp = refVideos.current.children[viewing];
+                comp.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center',
+                });
+            }, 100);
+        }
+    }, [viewing]);
+
     return (
         <div className={cx('wrapper')}>
-            <InfiniteScroll
-                pageStart={1}
-                loadMore={fetchVideo}
-                hasMore={true}
-                initialLoad={true}
-                loader={<Loader />}
-                threshold={100}
+            <div
+                className={cx('scroll-container')}
+                onWheelCapture={debouncedHandleScroll}
+                ref={refVideos}
             >
                 {videos.map((video, index) => (
-                    <Suspense
-                        fallback={
-                            <div className={cx('loading-wrapper')}>
-                                <Loading />
-                            </div>
-                        }
+                    <article
                         key={`${video.id} ${index}`}
+                        className={cx('video-wrapper')}
                     >
                         <VideoWrapper
                             followed={video.user.is_followed}
@@ -67,9 +103,9 @@ function Home() {
                                 setMuted={setMuted}
                             />
                         </VideoWrapper>
-                    </Suspense>
+                    </article>
                 ))}
-            </InfiniteScroll>
+            </div>
         </div>
     );
 }

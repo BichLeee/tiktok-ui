@@ -73,6 +73,8 @@ body {
     font-size: 1.6rem; // --> 1rem = 10px; 1.6rem = 16px
     line-height: 1.5;
     text-rendering: optimizespeed;
+    max-height: 100vh;
+    overflow-y: hidden;
 
     // Custom tippy tooltip
 

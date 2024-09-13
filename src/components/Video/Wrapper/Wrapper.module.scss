@@ -5,6 +5,7 @@
     gap: 20px;
     width: fit-content;
     margin-inline: auto;
+    max-width: calc(100vw / 2);
 }
 
 .action-buttons {
@@ -76,4 +77,10 @@
     font-size: 1.4rem;
     text-align: center;
     padding-top: 6px;
+}
+
+@media screen and (width <= 1071px) {
+    .wrapper {
+        max-width: calc(100vw - 240px);
+    }
 }

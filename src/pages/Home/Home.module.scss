@@ -1,9 +1,29 @@
 .wrapper {
     display: block;
+    height: 100%;
+}
+
+.scroll-container {
+    overflow-y: hidden;
+    padding-inline: 20px;
+}
+
+.video-wrapper {
+    height: 100vh;
+    padding-top: 60px;
+    display: flex;
+    padding-inline-end: 170px;
+    margin-inline: auto;
 }
 
 .loading-wrapper {
     background-color: var(--color-grey20);
     height: 100%;
     width: 100%;
+}
+
+@media screen and (width <= 1071px) {
+    .video-wrapper {
+        padding-inline-end: 0;
+    }
 }
