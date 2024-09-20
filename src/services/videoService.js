@@ -12,3 +12,11 @@ export const getTrendingVideo = (page = 1, type = 'for-you') => {
         console.log(err);
     }
 };
+
+export const getUserVideos = (id) => {
+    try {
+        return axiosConfig.get(`/users/${id}/videos`);
+    } catch (err) {
+        console.log(err);
+    }
+};

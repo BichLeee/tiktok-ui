@@ -23,10 +23,13 @@ const userSlice = createSlice({
             state.account = initState.account;
             state.token = initState.token;
         },
+        updateFollowings: (state, action) => {
+            state.followings_count = action.payload.followings_count;
+        },
     },
 });
 
-export const { login, logout } = userSlice.actions;
+export const { login, logout, updateFollowings } = userSlice.actions;
 export const selectUser = (state) => state.user.account;
 
 export default userSlice.reducer;

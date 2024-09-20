@@ -1,0 +1,117 @@
+.wrapper {
+    padding: 32px 24px 36px;
+    overflow-y: scroll;
+}
+
+.header {
+    display: flex;
+    max-width: 624px;
+    padding-right: 92px;
+    padding-left: 0;
+    min-height: 140px;
+    position: relative;
+}
+
+.avatar {
+    width: 116px;
+    height: 116px;
+}
+
+.name-group {
+    margin-left: 20px;
+
+    .full-name {
+        font-weight: 600;
+    }
+}
+
+.actions {
+    margin-top: 1.6rem;
+    text-wrap: nowrap;
+}
+
+.custom-button {
+    color: var(--color-grey100);
+    font-weight: normal;
+    box-shadow: none;
+    padding-inline: 20px;
+
+    &:hover {
+        background-color: rgb(248 248 248);
+    }
+}
+
+.share-button {
+    position: absolute;
+    right: 1px;
+    top: 0;
+}
+
+.statistics {
+    display: flex;
+    gap: 20px;
+    color: var(--color-grey75);
+
+    .number {
+        font-weight: bold;
+        color: var(--color-grey100);
+    }
+}
+
+.bio {
+    margin-top: 10px;
+}
+
+.tabs-container {
+    margin-top: 20px;
+}
+
+.tabs {
+    border-bottom: 1px solid var(--color-grey25);
+
+    button[role='tab'] {
+        color: var(--color-grey75);
+        font-size: 1.8rem;
+        height: 44px;
+        font-weight: 600;
+        padding-inline: 32px;
+        padding-block: 3px;
+        border-bottom: 3px solid !important;
+        border-color: transparent !important;
+
+        &:hover {
+            border-color: var(--color-grey100) !important ;
+        }
+    }
+
+    &:not(:hover) button[aria-selected='true'] {
+        border-color: var(--color-grey100) !important ;
+    }
+}
+
+.tab-title {
+    margin-left: 8px;
+}
+
+.tab-content {
+    padding-top: 20px;
+}
+
+.videos-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 24px 16px;
+}
+
+.video {
+    max-width: 320px;
+    border-radius: 4px;
+    align-content: center;
+    background-color: black;
+    padding: 2px;
+
+    div {
+        width: 100% !important;
+        height: auto !important;
+    }
+}

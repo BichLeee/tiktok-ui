@@ -1,0 +1,27 @@
+.videos-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 235px));
+    gap: 24px 16px;
+}
+
+.video {
+    max-width: 235px;
+    max-height: 320px;
+    border-radius: 4px;
+    align-content: center;
+    background-color: black;
+    padding: 1px;
+    overflow: hidden;
+
+    div {
+        width: 100% !important;
+        height: auto !important;
+        display: inline;
+    }
+}
+
+@media screen and (width < 887px) {
+    .videos-container {
+        grid-template-columns: auto auto auto;
+    }
+}
