@@ -59,8 +59,8 @@ function EditModal({ show, closeModal }) {
         });
 
         if (res.status === 200) {
-            updateCurrentUser();
-            location.reload();
+            const result = updateCurrentUser();
+            result && location.reload();
         }
     };
 
@@ -88,6 +88,9 @@ function EditModal({ show, closeModal }) {
         if (res.status === 200) {
             const data = res.data.data;
             localStorage.setItem('user', JSON.stringify(data));
+            return true;
+        } else {
+            return false;
         }
     };
 

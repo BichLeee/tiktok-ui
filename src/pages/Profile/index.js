@@ -74,7 +74,7 @@ function Profile() {
                         <img src={user.avatar} className={cx('avatar')} />
                     </div>
                     <div className={cx('name-group')}>
-                        <h1>
+                        <h1 className={cx('nickname')}>
                             <b>{user.nickname}</b>
                         </h1>
                         <h4 className={cx('full-name')}>
