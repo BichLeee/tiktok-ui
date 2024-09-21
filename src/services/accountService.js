@@ -1,5 +1,13 @@
 import axiosConfig from '~/utils/request';
 
+export const getCurrentUser = (page = 1) => {
+    try {
+        return axiosConfig.get('/auth/me');
+    } catch (err) {
+        console.log(err);
+    }
+};
+
 export const getFollowingsList = (page = 1) => {
     try {
         return axiosConfig.get('/me/followings', {
@@ -23,6 +31,30 @@ export const followUser = (id) => {
 export const unfollowUser = (id) => {
     try {
         return axiosConfig.post(`/users/${id}/unfollow`);
+    } catch (err) {
+        console.log(err);
+    }
+};
+
+export const updateProfile = ({
+    avatar,
+    nickname,
+    firstName,
+    lastName,
+    bio,
+}) => {
+    try {
+        var bodyFormData = new FormData();
+
+        nickname && bodyFormData.append('nickname', nickname);
+        firstName && bodyFormData.append('first_name', firstName);
+        lastName && bodyFormData.append('last_name', lastName);
+        avatar && bodyFormData.append('avatar', avatar);
+        bio && bodyFormData.append('bio', bio);
+
+        return axiosConfig.post(`/auth/me`, bodyFormData, {
+            params: { _method: 'PATCH' },
+        });
     } catch (err) {
         console.log(err);
     }

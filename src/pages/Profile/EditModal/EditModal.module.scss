@@ -1,0 +1,85 @@
+.modal {
+    & > div {
+        padding-inline: 50px;
+        min-width: 700px;
+    }
+}
+
+.modal-header {
+    padding: 24px 24px 12px !important;
+}
+
+.modal-title {
+    font-size: 2.4rem;
+    font-weight: 600;
+}
+
+.modal-body {
+    padding: 8px 24px 0 !important;
+}
+
+.field {
+    display: flex;
+    flex-flow: row;
+    flex-wrap: nowrap;
+    min-height: 128px;
+    padding-block: 16px;
+    border-bottom: 0.8px solid var(--color-grey12);
+    color: var(--color-grey100);
+}
+
+.title {
+    width: 120px;
+    margin-right: 24px;
+}
+
+.content {
+    position: relative;
+    width: min-content;
+}
+
+.avatar {
+    height: 96px;
+    width: 96px;
+    object-fit: cover;
+    object-position: center;
+    margin-left: 128px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.edit-button {
+    position: absolute;
+    right: 0;
+    bottom: -5px;
+    width: 30px;
+    height: 30px;
+    border: 1px solid var(--color-grey20) !important;
+    border-radius: 50%;
+    background-color: white;
+
+    svg {
+        display: block;
+        height: 12px;
+        margin-inline: auto;
+    }
+}
+
+.error {
+    color: var(--primary);
+    font-size: 1.2rem;
+    margin-top: 6px;
+}
+
+.small-text {
+    font-size: 1.2rem;
+    color: var(--color-grey75);
+}
+
+.mt-1 {
+    margin-top: 1.6rem;
+}
+
+.mt-2 {
+    margin-top: 0.8rem;
+}

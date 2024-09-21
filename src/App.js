@@ -40,7 +40,7 @@ function App() {
                         {publicRoutes.map((route, index) => {
                             const Layout = route.layout || DefaultLayout;
                             const Page = route.component;
-                            if (!route.auth || user.email != '') {
+                            if (!route.auth || user.email) {
                                 return (
                                     <Route
                                         key={index}

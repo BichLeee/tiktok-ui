@@ -1,0 +1,32 @@
+input.input {
+    background-color: rgb(22 24 35 / 6%);
+    padding: 7px 12px;
+    border-radius: 4px;
+    width: 360px;
+    height: 38px;
+    caret-color: var(--primary);
+    font-size: 1.6rem;
+
+    &:focus {
+        outline: rgb(22 24 35 / 20%) solid 1.5px;
+    }
+}
+
+textarea.textarea {
+    background-color: rgb(22 24 35 / 6%);
+    border-radius: 4px;
+    width: 360px;
+    height: 100px;
+    resize: none;
+    border: none;
+    padding: 12px;
+    caret-color: var(--primary);
+
+    &:focus {
+        outline: rgb(22 24 35 / 20%) solid 1.5px;
+    }
+}
+
+.error {
+    outline: rgb(255 76 58) solid 1.5px !important;
+}

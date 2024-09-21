@@ -25,15 +25,21 @@ function VideoTab() {
 
     return (
         <div className={cx('videos-container')}>
-            {videos.map((video) => (
-                <div className={cx('video')} key={video.id}>
-                    <VideoPreview
-                        muted={true}
-                        playing={false}
-                        video_url={video.file_url}
-                    />
-                </div>
-            ))}
+            {videos.length === 0 ? (
+                'Bạn không có video nào.'
+            ) : (
+                <>
+                    {videos.map((video) => (
+                        <div className={cx('video')} key={video.id}>
+                            <VideoPreview
+                                muted={true}
+                                playing={false}
+                                video_url={video.file_url}
+                            />
+                        </div>
+                    ))}
+                </>
+            )}
         </div>
     );
 }
