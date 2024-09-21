@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 import { faBookmark, faHeart } from '@fortawesome/free-regular-svg-icons';
 import {
     faFire,
@@ -10,6 +11,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
+import { t } from 'i18next';
 
 import EditModal from './EditModal';
 import VideoTab from './VideosTab';
@@ -25,28 +27,28 @@ const cx = classNames.bind(styles);
 const TABS = [
     {
         key: 'video',
-        title: 'Video',
+        title: t('label.videos'),
         icon: <FontAwesomeIcon icon={faTableCellsLarge} />,
         content: <VideoTab />,
         disabled: false,
     },
     {
         key: 'reup',
-        title: 'Bài đăng lại',
+        title: t('label.reposts'),
         icon: <FontAwesomeIcon icon={faRepeat} />,
         content: 'Không có bài đăng lại.',
         disabled: false,
     },
     {
         key: 'saved',
-        title: 'Yêu thích',
+        title: t('label.favorites'),
         icon: <FontAwesomeIcon icon={faBookmark} />,
         content: 'Không có bài đã lưu.',
         disabled: false,
     },
     {
         key: 'liked',
-        title: 'Đã thích',
+        title: t('label.liked'),
         icon: <FontAwesomeIcon icon={faHeart} />,
         content: 'Không có bài đã thích.',
         disabled: false,
@@ -55,6 +57,7 @@ const TABS = [
 
 function Profile() {
     const user = useUser();
+    const { t } = useTranslation();
     const [activeTab, setActiveTab] = useState(TABS[0]);
 
     // modal
@@ -89,14 +92,14 @@ function Profile() {
                                 className={cx('custom-button')}
                                 onClick={() => setShowEditModal(true)}
                             >
-                                Sửa hồ sơ
+                                {t('label.edit_profile')}
                             </Button>
                             <Button
                                 secondary
                                 leftIcon={<FontAwesomeIcon icon={faFire} />}
                                 className={cx('custom-button')}
                             >
-                                Quảng bá bài đăng
+                                {t('label.promote')}
                             </Button>
                         </div>
                     </div>
@@ -110,19 +113,19 @@ function Profile() {
                         <span className={cx('number')}>
                             {user.followings_count || 0}
                         </span>{' '}
-                        Đang follow
+                        {t('label.following')}
                     </div>
                     <div>
                         <span className={cx('number')}>
                             {user.followers_count || 0}
                         </span>{' '}
-                        Follower
+                        {t('label.followers')}
                     </div>
                     <div>
                         <span className={cx('number')}>
                             {user.likes_count || 0}
                         </span>{' '}
-                        Thích
+                        {t('label.likes')}
                     </div>
                 </div>
                 <div className={cx('bio')}>{user.bio}</div>

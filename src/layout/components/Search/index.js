@@ -1,5 +1,6 @@
-import { useEffect, useRef,useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Form, InputGroup } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 import {
     faCircleXmark,
     faMagnifyingGlass,
@@ -23,10 +24,11 @@ function Search() {
     const [searchValue, setSearchValue] = useState('');
     const [showResult, setShowResult] = useState(true);
     const [loading, setLoading] = useState(false);
+    const inputRef = useRef();
+
+    const { t } = useTranslation();
 
     const debounced = useDebounce(searchValue, 500);
-
-    const inputRef = useRef();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -66,7 +68,9 @@ function Search() {
                         {...attrs}
                     >
                         <PopperWrapper>
-                            <h5 className={cx('search-title')}>Tài khoản</h5>
+                            <h5 className={cx('search-title')}>
+                                {t('label.accounts')}
+                            </h5>
                             {accounts.map((account) => (
                                 <AccountItem key={account.id} info={account} />
                             ))}
@@ -77,7 +81,7 @@ function Search() {
             >
                 <InputGroup className={cx('search-inner')}>
                     <Form.Control
-                        placeholder="Tìm kiếm"
+                        placeholder={t('label.search')}
                         className={cx('input')}
                         value={searchValue}
                         ref={inputRef}

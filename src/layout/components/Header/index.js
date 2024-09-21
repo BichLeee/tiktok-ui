@@ -1,6 +1,7 @@
-import { useContext, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { faBell, faMessage } from '@fortawesome/free-regular-svg-icons';
 import {
     faArrowRightFromBracket,
@@ -16,6 +17,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Tippy from '@tippyjs/react';
 import classNames from 'classnames/bind';
+import i18n from 'i18next';
 
 import Login from '../Login';
 import Search from '../Search';
@@ -31,73 +33,94 @@ import Menu from '~/components/Popper/Menu';
 import config from '~/config';
 import { logout } from '~/services/authService';
 import { useUser } from '~/store/hooks';
+import { changeLanguage } from '~/store/languages';
 import { logout as logoutAccount } from '~/store/user';
 
 const cx = classNames.bind(styles);
-
-const MENU_ITEMS = [
-    {
-        icon: <FontAwesomeIcon icon={faUser} />,
-        title: 'Xem hồ sơ',
-        auth: true,
-    },
-    {
-        icon: <FontAwesomeIcon icon={faSeedling} />,
-        title: 'Công cụ dành cho nhà sáng tạo',
-        auth: false,
-    },
-    {
-        icon: <FontAwesomeIcon icon={faGear} />,
-        title: 'Cài đặt',
-        auth: true,
-    },
-    {
-        icon: <FontAwesomeIcon icon={faEarthAfrica} />,
-        title: 'Tiếng Việt',
-        children: [
-            { code: 'en', title: 'English' },
-            { code: 'vi', title: 'Tiếng Việt' },
-        ],
-        auth: false,
-    },
-    {
-        icon: <FontAwesomeIcon icon={faCircleQuestion} />,
-        title: 'Phản hồi và trợ giúp',
-        to: '/feedback',
-        auth: false,
-    },
-    {
-        icon: <FontAwesomeIcon icon={faMoon} />,
-        title: 'Chế độ tối',
-        auth: false,
-    },
-    {
-        title: 'hr',
-        auth: true,
-    },
-];
 
 function Header() {
     const [showLoginModal, setShowLoginModal] = useState(false);
     const user = useUser();
     const dispatch = useDispatch();
+    const { t } = useTranslation();
 
-    const renderMenuItems = () => [
-        ...MENU_ITEMS,
-        {
-            icon: <FontAwesomeIcon icon={faArrowRightFromBracket} />,
-            title: 'Đăng xuất',
-            auth: true,
-            onClick: async () => {
-                try {
-                    const res = await logout();
-                    dispatch(logoutAccount());
-                } catch (err) {
-                    console.log(err);
-                }
+    const navigate = useNavigate();
+
+    const renderMenuItems = useCallback(
+        () => [
+            {
+                icon: <FontAwesomeIcon icon={faUser} />,
+                title: t('label.viewprofile'),
+                onClick: () => navigate('/profile'),
+                auth: true,
             },
-        },
-    ];
+            {
+                icon: <FontAwesomeIcon icon={faSeedling} />,
+                title: t('label.creator'),
+                auth: false,
+            },
+            {
+                icon: <FontAwesomeIcon icon={faGear} />,
+                title: t('label.settings'),
+                auth: true,
+            },
+            {
+                icon: <FontAwesomeIcon icon={faEarthAfrica} />,
+                title:
+                    i18n.language === 'vi'
+                        ? t('label.vietnamese')
+                        : t('label.english'),
+                childHeader: t('label.language'),
+                children: [
+                    {
+                        code: 'en',
+                        title: t('label.english'),
+                        onClick: () => {
+                            dispatch(changeLanguage({ lang: 'en' }));
+                            location.reload();
+                        },
+                    },
+                    {
+                        code: 'vi',
+                        title: t('label.vietnamese'),
+                        onClick: () => {
+                            dispatch(changeLanguage({ lang: 'vi' }));
+                            location.reload();
+                        },
+                    },
+                ],
+                auth: false,
+            },
+            {
+                icon: <FontAwesomeIcon icon={faCircleQuestion} />,
+                title: t('label.feedback'),
+                auth: false,
+            },
+            {
+                icon: <FontAwesomeIcon icon={faMoon} />,
+                title: t('label.darkmode'),
+                auth: false,
+            },
+            {
+                title: 'hr',
+                auth: true,
+            },
+            {
+                icon: <FontAwesomeIcon icon={faArrowRightFromBracket} />,
+                title: t('label.logout'),
+                auth: true,
+                onClick: async () => {
+                    try {
+                        const res = await logout();
+                        dispatch(logoutAccount());
+                    } catch (err) {
+                        console.log(err);
+                    }
+                },
+            },
+        ],
+        [i18n.language],
+    );
 
     return (
         <>
@@ -121,14 +144,14 @@ function Header() {
                                     className={cx('custom-upload')}
                                     leftIcon={<FontAwesomeIcon icon={faPlus} />}
                                 >
-                                    Tải lên
+                                    {t('label.upload')}
                                 </Button>
                                 <div style={{ width: '20px' }} />
                                 <Tippy
                                     interactive
                                     arrow
                                     placement="bottom"
-                                    content="Tin nhắn"
+                                    content={t('label.messages')}
                                     className={cx('custom-tooltip')}
                                 >
                                     <div>
@@ -146,7 +169,7 @@ function Header() {
                                     interactive
                                     arrow
                                     placement="bottom"
-                                    content="Hộp thư"
+                                    content={t('label.inbox')}
                                     className={cx('custom-tooltip')}
                                 >
                                     <div>
@@ -178,9 +201,9 @@ function Header() {
                                         setShowLoginModal((prev) => !prev)
                                     }
                                 >
-                                    Đăng nhập
+                                    <b>{t('label.login')}</b>
                                 </Button>
-                                <Menu items={MENU_ITEMS}>
+                                <Menu items={renderMenuItems()}>
                                     <button className={cx('more-btn')}>
                                         <FontAwesomeIcon
                                             icon={faEllipsisVertical}

@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 import { Modal } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
@@ -24,6 +25,8 @@ function EditModal({ show, closeModal }) {
     const [bio, setBio] = useState(user.bio);
 
     const fileInputRef = useRef();
+
+    const { t } = useTranslation();
 
     const openFileExplorer = () => {
         fileInputRef.current.click();
@@ -103,12 +106,16 @@ function EditModal({ show, closeModal }) {
         >
             <Modal.Header closeButton className={cx('modal-header')}>
                 <Modal.Title>
-                    <span className={cx('modal-title')}>Sửa hồ sơ</span>
+                    <span className={cx('modal-title')}>
+                        {t('label.edit_profile')}
+                    </span>
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body className={cx('modal-body')}>
                 <div className={cx('field')}>
-                    <div className={cx('title')}>Ảnh hồ sơ</div>
+                    <div className={cx('title')}>
+                        {t('label.profile_photo')}
+                    </div>
                     <div className={cx('content')}>
                         <img
                             src={image?.src || user.avatar}
@@ -129,14 +136,14 @@ function EditModal({ show, closeModal }) {
                     </div>
                 </div>
                 <div className={cx('field')}>
-                    <div className={cx('title')}>TikTok ID</div>
+                    <div className={cx('title')}>{t('label.username')}</div>
                     <div className={cx('content')}>
                         <Input
                             type="input"
                             value={nickname}
                             setValue={(value) => setNickname(value)}
                             maxLength={24}
-                            placeholder="TikTok ID"
+                            placeholder={t('label.username')}
                         />
                         {nickname.length > 24 && (
                             <p className={cx('error')}>Tối đa 24 ký tự</p>
@@ -152,14 +159,14 @@ function EditModal({ show, closeModal }) {
                     </div>
                 </div>
                 <div className={cx('field')}>
-                    <div className={cx('title')}>Tên</div>
+                    <div className={cx('title')}>{t('label.name')}</div>
                     <div className={cx('content')}>
                         <Input
                             type="input"
                             value={firstName}
                             setValue={(value) => setFirstName(value)}
                             maxLength={20}
-                            placeholder="Tên"
+                            placeholder={t('label.first_name')}
                         />
                         {firstName.length > 20 && (
                             <p className={cx('error')}>Tối đa 20 ký tự</p>
@@ -169,7 +176,7 @@ function EditModal({ show, closeModal }) {
                             value={lastName}
                             setValue={(value) => setLastName(value)}
                             maxLength={20}
-                            placeholder="Họ"
+                            placeholder={t('label.last_name')}
                             className={cx('mt-2')}
                         />
                         {lastName.length > 20 && (
@@ -184,7 +191,7 @@ function EditModal({ show, closeModal }) {
                     </div>
                 </div>
                 <div className={cx('field')}>
-                    <div className={cx('title')}>Tiểu sử</div>
+                    <div className={cx('title')}>{t('label.bio')}</div>
                     <div className={cx('content')}>
                         <Input
                             type="textarea"
@@ -208,7 +215,7 @@ function EditModal({ show, closeModal }) {
             </Modal.Body>
             <Modal.Footer>
                 <Button secondary size="small" onClick={handleClose}>
-                    Hủy
+                    {t('label.cancel')}
                 </Button>
                 <Button
                     primary
@@ -216,7 +223,7 @@ function EditModal({ show, closeModal }) {
                     onClick={() => handleSave()}
                     disabled={!validate()}
                 >
-                    Lưu
+                    {t('label.save')}
                 </Button>
             </Modal.Footer>
         </Modal>

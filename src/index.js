@@ -1,11 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { I18nextProvider } from 'react-i18next';
 import { Provider } from 'react-redux';
 
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 import GlobalStyles from '~/components/GlobalStyles';
+import i18n from '~/lang';
 import store from '~/store/store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

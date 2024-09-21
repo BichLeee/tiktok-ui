@@ -1,4 +1,5 @@
 import classNames from 'classnames/bind';
+import { t } from 'i18next';
 
 import FooterItem from './FooterItem';
 
@@ -8,7 +9,7 @@ const cx = classNames.bind(styles);
 
 const ITEMS = [
     {
-        title: 'Công ty',
+        title: t('label.company'),
         linklist: [
             { text: 'Giới thiệu', href: '/#' },
             { text: 'Bảng tin', href: '/#' },
@@ -17,7 +18,7 @@ const ITEMS = [
         ],
     },
     {
-        title: 'Chương trình',
+        title: t('label.program'),
         linklist: [
             { text: 'TikTok for Good', href: '/#' },
             { text: 'Quảng cáo', href: '/#' },
@@ -29,7 +30,7 @@ const ITEMS = [
         ],
     },
     {
-        title: 'Điều khoản và chính sách',
+        title: t('label.terms'),
         linklist: [
             { text: 'Trợ giúp', href: '/#' },
             { text: 'An toàn', href: '/#' },
@@ -46,7 +47,11 @@ function Footer() {
     return (
         <div className={cx('footer')}>
             {ITEMS.map((item) => (
-                <FooterItem key={item.title} linklist={item.linklist} title={item.title} />
+                <FooterItem
+                    key={item.title}
+                    linklist={item.linklist}
+                    title={item.title}
+                />
             ))}
             <span className={cx('copy-right')}>© 2024 TikTok</span>
         </div>

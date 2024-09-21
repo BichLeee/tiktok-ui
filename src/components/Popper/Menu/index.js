@@ -16,7 +16,7 @@ import { logout as logoutAccount } from '~/store/user';
 const cx = classNames.bind(styles);
 
 function Menu({ children, items = [] }) {
-    const [history, setHistory] = useState([{ data: items }]);
+    const [history, setHistory] = useState([{ data: items, header: '' }]);
     const current = history[history.length - 1];
     const dispatch = useDispatch();
 
@@ -44,7 +44,10 @@ function Menu({ children, items = [] }) {
                         onClick={() =>
                             setHistory((prev) => [
                                 ...prev,
-                                { data: item.children },
+                                {
+                                    data: item.children,
+                                    header: item.childHeader || '',
+                                },
                             ])
                         }
                     />
@@ -78,7 +81,7 @@ function Menu({ children, items = [] }) {
                         >
                             <FontAwesomeIcon icon={faChevronLeft} />
                         </button>
-                        <h3 className={cx('header-title')}>Language</h3>
+                        <h3 className={cx('header-title')}>{current.header}</h3>
                     </div>
                 )}
                 {renderItems()}

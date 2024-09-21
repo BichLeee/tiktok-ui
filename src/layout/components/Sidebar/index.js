@@ -1,4 +1,5 @@
 import { useCallback, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
     faCompass,
     faHeartCircleCheck,
@@ -8,6 +9,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
+import { t } from 'i18next';
 
 import Login from '../Login';
 
@@ -22,68 +24,74 @@ import { useUser } from '~/store/hooks';
 
 const cx = classNames.bind(styles);
 
-const MENU_ITEMS = [
-    {
-        icon: <FontAwesomeIcon icon={faHouse} />,
-        activeIcon: <FontAwesomeIcon icon={faHouse} style={{ color: 'red' }} />,
-        title: 'Dành cho bạn',
-        to: '/',
-        auth: false,
-    },
-    {
-        icon: <FontAwesomeIcon icon={faCompass} />,
-        activeIcon: (
-            <FontAwesomeIcon icon={faCompass} style={{ color: 'red' }} />
-        ),
-        title: 'Khám phá',
-        to: '/explore',
-        disable: true,
-        auth: false,
-    },
-    {
-        icon: <FontAwesomeIcon icon={faHeartCircleCheck} />,
-        activeIcon: (
-            <FontAwesomeIcon
-                icon={faHeartCircleCheck}
-                style={{ color: 'red' }}
-            />
-        ),
-        title: 'Đang Follow',
-        to: '/following',
-        disable: false,
-        auth: false,
-    },
-    {
-        icon: <FontAwesomeIcon icon={faUserGroup} />,
-        activeIcon: (
-            <FontAwesomeIcon icon={faUserGroup} style={{ color: 'red' }} />
-        ),
-        title: 'Bạn bè',
-        to: '/friends',
-        disable: true,
-        auth: true,
-    },
-    {
-        icon: <FontAwesomeIcon icon={faVideo} />,
-        activeIcon: <FontAwesomeIcon icon={faVideo} style={{ color: 'red' }} />,
-        title: 'LIVE',
-        to: '/live',
-        disable: true,
-        auth: false,
-    },
-];
-
 function Sidebar() {
     const user = useUser();
     const avatar = user.avatar;
+
+    const { t } = useTranslation();
 
     const [show, setShow] = useState(false);
 
     const renderMenuItems = useCallback(
         () => [
-            ...MENU_ITEMS.filter(
-                (item) => !item.auth || (item.auth && user.email),
-            ),
+            {
+                icon: <FontAwesomeIcon icon={faHouse} />,
+                activeIcon: (
+                    <FontAwesomeIcon icon={faHouse} style={{ color: 'red' }} />
+                ),
+                title: t('label.foryou'),
+                to: '/',
+                auth: false,
+            },
+            {
+                icon: <FontAwesomeIcon icon={faCompass} />,
+                activeIcon: (
+                    <FontAwesomeIcon
+                        icon={faCompass}
+                        style={{ color: 'red' }}
+                    />
+                ),
+                title: t('label.explore'),
+                to: '/explore',
+                disable: true,
+                auth: false,
+            },
+            {
+                icon: <FontAwesomeIcon icon={faHeartCircleCheck} />,
+                activeIcon: (
+                    <FontAwesomeIcon
+                        icon={faHeartCircleCheck}
+                        style={{ color: 'red' }}
+                    />
+                ),
+                title: t('label.following'),
+                to: '/following',
+                disable: false,
+                auth: false,
+            },
+            {
+                icon: <FontAwesomeIcon icon={faUserGroup} />,
+                activeIcon: (
+                    <FontAwesomeIcon
+                        icon={faUserGroup}
+                        style={{ color: 'red' }}
+                    />
+                ),
+                title: t('label.friends'),
+                to: '/friends',
+                disable: true,
+                auth: true,
+            },
+            {
+                icon: <FontAwesomeIcon icon={faVideo} />,
+                activeIcon: (
+                    <FontAwesomeIcon icon={faVideo} style={{ color: 'red' }} />
+                ),
+                title: t('label.live'),
+                to: '/live',
+                disable: true,
+                auth: false,
+            },
             {
                 icon: (
                     <Image
@@ -99,7 +107,7 @@ function Sidebar() {
                         fallback={images.default_avatar}
                     />
                 ),
-                title: 'Hồ sơ',
+                title: t('label.profile'),
                 to: '/profile',
                 ...(!user.email && { onClick: () => setShow(true) }),
                 disable: false,
@@ -121,7 +129,7 @@ function Sidebar() {
                             <div className={cx('hr')} />
                             <div className={cx('following-container')}>
                                 <span className={cx('following-title')}>
-                                    Các tài khoản đang follow
+                                    {t('label.followingAcc')}
                                 </span>
                                 <SuggestedAccounts />
                             </div>

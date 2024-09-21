@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import {
     BrowserRouter as Router,
@@ -7,8 +8,11 @@ import {
     Routes,
 } from 'react-router-dom';
 
+import './lang';
+
 import routes from './config/routes';
 import { useUser } from './store/hooks';
+import { changeLanguage } from './store/languages';
 import { login as loginAccount } from './store/user';
 
 import { DefaultLayout } from '~/layout';
@@ -19,7 +23,12 @@ function App() {
     const dispatch = useDispatch();
     const user = useUser();
 
+    const { t } = useTranslation();
+
+    console.log(t('label.upload'));
+
     useEffect(() => {
+        // user
         const token = localStorage.getItem('token');
         const user = localStorage.getItem('user');
         if (token && user) {
@@ -29,6 +38,13 @@ function App() {
             };
             dispatch(loginAccount(data));
         }
+
+        //language
+        const lang = localStorage.getItem('language') || 'vi';
+        if (lang) {
+            dispatch(changeLanguage({ lang }));
+        }
+
         setDehyrated(true);
     }, []);
 
