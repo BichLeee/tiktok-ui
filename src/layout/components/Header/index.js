@@ -51,7 +51,7 @@ function Header() {
             {
                 icon: <FontAwesomeIcon icon={faUser} />,
                 title: t('label.viewprofile'),
-                onClick: () => navigate('/profile'),
+                onClick: () => navigate(config.routes.profile),
                 auth: true,
             },
             {
@@ -143,6 +143,9 @@ function Header() {
                                     secondary
                                     className={cx('custom-upload')}
                                     leftIcon={<FontAwesomeIcon icon={faPlus} />}
+                                    onClick={() =>
+                                        navigate(config.routes.upload)
+                                    }
                                 >
                                     {t('label.upload')}
                                 </Button>

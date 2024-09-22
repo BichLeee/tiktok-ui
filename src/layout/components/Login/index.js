@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { faEye, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
+import { t } from 'i18next';
 
 import styles from './Login.module.scss';
 
@@ -86,11 +87,11 @@ function Login({ show, handleClose }) {
             <Modal.Header closeButton className={cx('header')} />
             <Modal.Body className={cx('body')}>
                 <h1 className={cx('title')}>
-                    <b>{isRegister ? 'Đăng ký' : 'Đăng nhập'}</b>
+                    <b>{isRegister ? t('label.signup') : t('label.login')}</b>
                 </h1>
                 <Form onSubmit={handleSubmit}>
                     <Form.Group className="mb-3" controlId="email">
-                        <Form.Label>Email</Form.Label>
+                        <Form.Label>{t('label.email')}</Form.Label>
                         <Form.Control
                             type="text"
                             value={email}
@@ -98,7 +99,7 @@ function Login({ show, handleClose }) {
                             onChange={(e) => {
                                 setEmail(e.target.value);
                             }}
-                            placeholder="Email"
+                            placeholder={t('label.email')}
                             onClick={hideError}
                         />
                     </Form.Group>
@@ -113,7 +114,7 @@ function Login({ show, handleClose }) {
                             onChange={(e) => {
                                 setPassword(e.target.value);
                             }}
-                            placeholder="Mật khẩu"
+                            placeholder={t('label.password')}
                             onClick={hideError}
                         />
                         <button
@@ -135,7 +136,7 @@ function Login({ show, handleClose }) {
                     )}
                     {!isRegister && (
                         <a href="#" className={cx('forgot-password-link')}>
-                            Quên mật khẩu?
+                            {t('label.forgot_password')}
                         </a>
                     )}
                     <Button
@@ -145,37 +146,39 @@ function Login({ show, handleClose }) {
                         disabled={email == '' || password == ''}
                         type="submit"
                     >
-                        {loading ? (
-                            <Loading />
-                        ) : isRegister ? (
-                            'Đăng ký'
-                        ) : (
-                            'Đăng nhập'
-                        )}
+                        <b>
+                            {loading ? (
+                                <Loading />
+                            ) : isRegister ? (
+                                t('label.signup')
+                            ) : (
+                                t('label.login')
+                            )}
+                        </b>
                     </Button>
                 </Form>
             </Modal.Body>
             <Modal.Footer className={cx('footer')}>
                 {isRegister ? (
                     <p>
-                        Bạn đã có tài khoản?{' '}
+                        {t('label.have_account')}{' '}
                         <a
                             href="#"
                             className={cx('sign-up-link')}
                             onClick={changeForm}
                         >
-                            Đăng nhập
+                            {t('label.login')}
                         </a>
                     </p>
                 ) : (
                     <p>
-                        Bạn không có tài khoản?{' '}
+                        {t('label.dont_have_account')}{' '}
                         <a
                             href="#"
                             className={cx('sign-up-link')}
                             onClick={changeForm}
                         >
-                            Đăng ký
+                            {t('label.signup')}
                         </a>
                     </p>
                 )}

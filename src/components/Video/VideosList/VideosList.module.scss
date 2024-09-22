@@ -7,14 +7,15 @@
     height: 100vh;
     padding-top: 60px;
     display: flex;
-    padding-inline-end: 170px;
+    padding-inline-end: 70px;
     margin-inline: auto;
 }
 
-.loading-wrapper {
-    background-color: var(--color-grey20);
-    height: 100%;
+.loader-wrapper {
     width: 100%;
+    text-align: center;
+    padding-inline-end: 100px;
+    padding-top: 50px;
 }
 
 @media screen and (width <= 1071px) {

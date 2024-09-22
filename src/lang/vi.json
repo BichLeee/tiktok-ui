@@ -42,5 +42,12 @@
     "label.last_name": "Họ",
     "label.bio": "Tiểu sử",
     "label.cancel": "Hủy",
-    "label.save": "Lưu"
+    "label.save": "Lưu",
+
+    "label.email": "Email",
+    "label.password": "Mật khẩu",
+    "label.forgot_password": "Quên mật khẩu",
+    "label.signup": "Đăng ký",
+    "label.dont_have_account": "Bạn không có tài khoản?",
+    "label.have_account": "Bạn đã có tài khoản?"
 }

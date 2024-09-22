@@ -6,7 +6,7 @@
 
 .video {
     max-width: 235px;
-    max-height: 320px;
+    height: 320px;
     border-radius: 4px;
     align-content: center;
     background-color: black;
@@ -14,9 +14,11 @@
     overflow: hidden;
 
     div {
-        width: 100% !important;
-        height: auto !important;
+        // width: auto !important;
+        // height: auto !important;
         display: inline;
+        background-size: contain !important;
+        background-repeat: no-repeat;
     }
 }
 

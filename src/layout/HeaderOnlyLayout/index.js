@@ -4,9 +4,7 @@ function HeaderOnlyLayout({ children }) {
     return (
         <div>
             <Header></Header>
-            <div className="container">
-                <div className="content">{children}</div>
-            </div>
+            <div className="content">{children}</div>
         </div>
     );
 }

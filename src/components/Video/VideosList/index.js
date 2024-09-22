@@ -4,11 +4,13 @@ import classNames from 'classnames/bind';
 
 import styles from './VideosList.module.scss';
 
+import Loader from '~/components/loader';
 import { Video, VideoWrapper } from '~/components/Video';
+import { getTrendingVideo } from '~/services/videoService';
 
 const cx = classNames.bind(styles);
 
-function VideosList({ getVideo }) {
+function VideosList({ videoType }) {
     const [muted, setMuted] = useState(true);
     const [videos, setVideos] = useState([]);
     const [page, setPage] = useState(1);
@@ -18,7 +20,7 @@ function VideosList({ getVideo }) {
     const refVideos = useRef();
 
     const fetchVideo = useCallback(async () => {
-        const res = await getVideo(page);
+        const res = await getTrendingVideo(page, videoType);
         const newVideos = res.data.data;
         if (res.status === 200) {
             setPage((prev) => prev + 1);
@@ -80,44 +82,46 @@ function VideosList({ getVideo }) {
         }
     }, [dehydrate]);
 
-    return (
-        dehydrate && (
-            <div
-                className={cx('scroll-container')}
-                onWheelCapture={debouncedHandleScroll}
-                ref={refVideos}
-            >
-                {videos.map((video, index) => (
-                    <article
-                        key={`${video.id} ${index}`}
-                        className={cx('video-wrapper')}
+    return dehydrate ? (
+        <div
+            className={cx('scroll-container')}
+            onWheelCapture={debouncedHandleScroll}
+            ref={refVideos}
+        >
+            {videos.map((video, index) => (
+                <article
+                    key={`${video.id} ${index}`}
+                    className={cx('video-wrapper')}
+                >
+                    <VideoWrapper
+                        followed={video.user.is_followed}
+                        liked={video.is_liked}
+                        saved={false}
+                        likeNumber={video.likes_count}
+                        commentNumber={video.comments_count}
+                        saveNumber={video.views_count}
+                        shareNumber={video.shares_count}
+                        author={{
+                            img: video.user.avatar,
+                            id: video.user.id,
+                        }}
                     >
-                        <VideoWrapper
-                            followed={video.user.is_followed}
-                            liked={video.is_liked}
-                            saved={false}
-                            likeNumber={video.likes_count}
-                            commentNumber={video.comments_count}
-                            saveNumber={video.views_count}
-                            shareNumber={video.shares_count}
-                            author={{
-                                img: video.user.avatar,
-                                id: video.user.id,
-                            }}
-                        >
-                            <Video
-                                author={video.user.nickname}
-                                title={video.description}
-                                music_title={video.music}
-                                video_url={video.file_url}
-                                muted={muted}
-                                setMuted={setMuted}
-                            />
-                        </VideoWrapper>
-                    </article>
-                ))}
-            </div>
-        )
+                        <Video
+                            author={video.user.nickname}
+                            title={video.description}
+                            music_title={video.music}
+                            video_url={video.file_url}
+                            muted={muted}
+                            setMuted={setMuted}
+                        />
+                    </VideoWrapper>
+                </article>
+            ))}
+        </div>
+    ) : (
+        <div className={cx('loader-wrapper')}>
+            <Loader primary />
+        </div>
     );
 }
 

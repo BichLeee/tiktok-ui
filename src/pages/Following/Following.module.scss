@@ -1,0 +1,82 @@
+.wrapper {
+    padding: 20px;
+}
+
+.custom-loader {
+    border-color: red;
+    border-bottom-color: white !important;
+}
+
+.account-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 24px 16px;
+    margin-inline: auto;
+    width: fit-content;
+}
+
+.account-card {
+    width: 230px;
+    height: 300px;
+    border-radius: 10px;
+    position: relative;
+    background-color: black;
+    overflow: hidden;
+}
+
+.video {
+    max-width: 235px;
+    max-height: 320px;
+    border-radius: 10px;
+    align-content: center;
+    background-color: black;
+    padding: 1px;
+    overflow: hidden;
+
+    div {
+        width: 100% !important;
+        height: auto !important;
+        display: inline;
+    }
+}
+
+.info {
+    text-align: center;
+    width: 100%;
+    color: white;
+    position: absolute;
+    bottom: 12px;
+    pointer-events: none;
+
+    .avatar {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 7px;
+    }
+
+    .name {
+        font-size: 1.8rem;
+        font-weight: bold;
+    }
+
+    .nickname {
+        font-size: 1.4rem;
+        font-weight: 600;
+    }
+}
+
+.check-icon {
+    margin-left: 6px;
+    height: 14px;
+    width: 14px;
+    color: rgb(53 225 225 / 100%);
+}
+
+.follow-btn {
+    width: 100% !important;
+    max-width: 164px;
+    margin-top: 10px;
+    pointer-events: fill;
+}

@@ -35,6 +35,7 @@ function VideoTab() {
                                 muted={true}
                                 playing={false}
                                 video_url={video.file_url}
+                                thumbnail={video.thumb_url}
                             />
                         </div>
                     ))}

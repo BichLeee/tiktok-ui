@@ -14,6 +14,7 @@ import styles from './Wrapper.module.scss';
 
 import IconButton from '~/components/IconButton';
 import { followUser, unfollowUser } from '~/services/accountService';
+import { useUser } from '~/store/hooks';
 
 const cx = classNames.bind(styles);
 
@@ -32,6 +33,8 @@ function Wrapper({
     const [isLiked, setIsLiked] = useState(liked);
     const [isSaved, setIsSaved] = useState(saved);
 
+    const user = useUser();
+
     const formatNumberToString = (number) => {
         if (number >= 1000000) {
             return `${(number / 1000000).toFixed(1)}K`;
@@ -42,12 +45,14 @@ function Wrapper({
     };
 
     const handleFollow = async () => {
-        if (isfollowed === true) {
-            await unfollowUser(author.id);
-            setIsFollowed(false);
-        } else {
-            await followUser(author.id);
-            setIsFollowed(true);
+        if (user.email) {
+            if (isfollowed === true) {
+                await unfollowUser(author.id);
+                setIsFollowed(false);
+            } else {
+                await followUser(author.id);
+                setIsFollowed(true);
+            }
         }
     };
 
@@ -67,7 +72,7 @@ function Wrapper({
                             'follow-btn',
                             isfollowed ? 'followed' : 'follow',
                         )}
-                        onClick={handleFollow}
+                        onClick={() => checkAuth(handleFollow)}
                     >
                         {isfollowed ? (
                             <FontAwesomeIcon icon={faCheck} />

@@ -62,8 +62,8 @@ function EditModal({ show, closeModal }) {
         });
 
         if (res.status === 200) {
-            const result = updateCurrentUser();
-            result && location.reload();
+            const result = await updateCurrentUser();
+            if (result) location.reload();
         }
     };
 
