@@ -1,0 +1,44 @@
+.selection {
+    [class$='-control'] {
+        background-color: rgb(0 0 0 / 5%);
+        padding-right: 8px;
+        padding-left: 12px;
+        height: 40px;
+        font-size: 1.6rem;
+        border-radius: 8px;
+        border: 0 !important;
+        box-shadow: none;
+
+        &:hover {
+            box-shadow: none;
+            border: 0 !important;
+        }
+    }
+
+    [class$='menu'] {
+        border: 1px solid var(--ui-shape-neutral-3);
+        border-radius: 12px;
+        box-shadow: 0 5px 26px 0 rgb(0 0 0 / 12%);
+    }
+
+    [class$='-indicatorSeparator'] {
+        width: 0;
+    }
+
+    [role='listbox'] {
+        padding: 5px;
+    }
+
+    [class$='-option'] {
+        border-radius: 8px;
+
+        &:hover {
+            background-color: rgb(0 0 0 / 5%) !important;
+        }
+    }
+
+    [aria-selected='true'] {
+        background-color: white;
+        color: #212529;
+    }
+}

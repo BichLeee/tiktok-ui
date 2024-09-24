@@ -4,14 +4,7 @@ import styles from './Input.module.scss';
 
 const cx = classNames.bind(styles);
 
-function Input({
-    type,
-    value,
-    setValue,
-    className,
-    maxLength = null,
-    ...passProps
-}) {
+function Input({ type, value, setValue, className, maxLength = null, ...passProps }) {
     let Input;
 
     switch (type) {
@@ -38,13 +31,7 @@ function Input({
         ...passProps,
     };
 
-    return (
-        <Input
-            {...props}
-            className={classes}
-            onChange={(e) => setValue(e.target.value)}
-        />
-    );
+    return <Input {...props} className={classes} onChange={(e) => setValue(e.target.value)} />;
 }
 
 export default Input;

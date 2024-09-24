@@ -2,12 +2,7 @@
     "env": {
         "browser": true
     },
-    "plugins": [
-        "@typescript-eslint",
-        "react",
-        "prettier",
-        "simple-import-sort"
-    ],
+    "plugins": ["@typescript-eslint", "react", "prettier", "simple-import-sort"],
     "parser": "@typescript-eslint/parser",
     "rules": {
         "no-undef": "off",
