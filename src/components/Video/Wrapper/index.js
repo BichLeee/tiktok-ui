@@ -61,18 +61,12 @@ function Wrapper({
             {children}
             <div className={cx('action-buttons')}>
                 <div className={cx('author')}>
-                    <button
-                        className={cx('author-btn')}
-                        onClick={() => console.log(author.id)}
-                    >
+                    <button className={cx('author-btn')} onClick={() => console.log(author.id)}>
                         <img src={author.img} />
                     </button>
                     <button
-                        className={cx(
-                            'follow-btn',
-                            isfollowed ? 'followed' : 'follow',
-                        )}
-                        onClick={() => checkAuth(handleFollow)}
+                        className={cx('follow-btn', isfollowed ? 'followed' : 'follow')}
+                        onClick={() => user.email && handleFollow()}
                     >
                         {isfollowed ? (
                             <FontAwesomeIcon icon={faCheck} />
@@ -91,19 +85,12 @@ function Wrapper({
                         }}
                     />
                     <div className={cx('number')}>
-                        {formatNumberToString(
-                            isLiked ? likeNumber + 1 : likeNumber,
-                        )}
+                        {formatNumberToString(isLiked ? likeNumber + 1 : likeNumber)}
                     </div>
                 </div>
                 <div>
-                    <IconButton
-                        secondary
-                        icon={<FontAwesomeIcon icon={faCommentDots} />}
-                    />
-                    <div className={cx('number')}>
-                        {formatNumberToString(commentNumber)}
-                    </div>
+                    <IconButton secondary icon={<FontAwesomeIcon icon={faCommentDots} />} />
+                    <div className={cx('number')}>{formatNumberToString(commentNumber)}</div>
                 </div>
                 <div>
                     <IconButton
@@ -115,19 +102,12 @@ function Wrapper({
                         }}
                     />
                     <div className={cx('number')}>
-                        {formatNumberToString(
-                            isSaved ? saveNumber + 1 : saveNumber,
-                        )}
+                        {formatNumberToString(isSaved ? saveNumber + 1 : saveNumber)}
                     </div>
                 </div>
                 <div>
-                    <IconButton
-                        secondary
-                        icon={<FontAwesomeIcon icon={faShare} />}
-                    />
-                    <div className={cx('number')}>
-                        {formatNumberToString(shareNumber)}
-                    </div>
+                    <IconButton secondary icon={<FontAwesomeIcon icon={faShare} />} />
+                    <div className={cx('number')}>{formatNumberToString(shareNumber)}</div>
                 </div>
             </div>
         </div>

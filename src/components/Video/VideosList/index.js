@@ -60,27 +60,35 @@ function VideosList({ videoType }) {
         fetchVideo();
     }, []);
 
-    useEffect(() => {
-        if (refVideos.current && refVideos.current.children[viewing]) {
-            setTimeout(() => {
-                const comp = refVideos.current.children[viewing];
-                comp.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'center',
-                });
-            }, 100);
-        }
-    }, [viewing]);
+    videos &&
+        useEffect(() => {
+            if (refVideos.current && refVideos.current.children[viewing]) {
+                var scroll = setTimeout(() => {
+                    const comp = refVideos.current?.children[viewing];
+                    if (comp) {
+                        comp.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'center',
+                        });
+                    }
+                }, 100);
+            }
 
-    useEffect(() => {
-        if (refVideos.current) {
-            const comp = refVideos.current.children[viewing];
-            comp.scrollIntoView({
-                behavior: 'smooth',
-                block: 'center',
-            });
-        }
-    }, [dehydrate]);
+            return () => clearTimeout(scroll);
+        }, [viewing]);
+
+    videos &&
+        useEffect(() => {
+            if (refVideos.current) {
+                const comp = refVideos.current.children[viewing];
+                if (comp) {
+                    comp.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center',
+                    });
+                }
+            }
+        }, [dehydrate]);
 
     return dehydrate ? (
         <div
@@ -88,35 +96,36 @@ function VideosList({ videoType }) {
             onWheelCapture={debouncedHandleScroll}
             ref={refVideos}
         >
-            {videos.map((video, index) => (
-                <article
-                    key={`${video.id} ${index}`}
-                    className={cx('video-wrapper')}
-                >
-                    <VideoWrapper
-                        followed={video.user.is_followed}
-                        liked={video.is_liked}
-                        saved={false}
-                        likeNumber={video.likes_count}
-                        commentNumber={video.comments_count}
-                        saveNumber={video.views_count}
-                        shareNumber={video.shares_count}
-                        author={{
-                            img: video.user.avatar,
-                            id: video.user.id,
-                        }}
-                    >
-                        <Video
-                            author={video.user.nickname}
-                            title={video.description}
-                            music_title={video.music}
-                            video_url={video.file_url}
-                            muted={muted}
-                            setMuted={setMuted}
-                        />
-                    </VideoWrapper>
-                </article>
-            ))}
+            {videos.length === 0 ? (
+                <h4>You haven't followed anyone.</h4>
+            ) : (
+                videos.map((video, index) => (
+                    <article key={`${video.id} ${index}`} className={cx('video-wrapper')}>
+                        <VideoWrapper
+                            followed={video.user.is_followed}
+                            liked={video.is_liked}
+                            saved={false}
+                            likeNumber={video.likes_count}
+                            commentNumber={video.comments_count}
+                            saveNumber={video.views_count}
+                            shareNumber={video.shares_count}
+                            author={{
+                                img: video.user.avatar,
+                                id: video.user.id,
+                            }}
+                        >
+                            <Video
+                                author={video.user.nickname}
+                                title={video.description}
+                                music_title={video.music}
+                                video_url={video.file_url}
+                                muted={muted}
+                                setMuted={setMuted}
+                            />
+                        </VideoWrapper>
+                    </article>
+                ))
+            )}
         </div>
     ) : (
         <div className={cx('loader-wrapper')}>
